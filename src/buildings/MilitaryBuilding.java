@@ -1,10 +1,9 @@
 package buildings;
 
-public class test {
+public class MilitaryBuilding {
 
-	public test() {
+	public MilitaryBuilding() {
 		// TODO Auto-generated constructor stub
-		System.out.println("test");
 	}
 
 }
