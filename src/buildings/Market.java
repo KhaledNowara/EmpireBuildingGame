@@ -1,6 +1,6 @@
 package buildings;
 
-public class Market {
+public class Market extends EconomicBuilding {
 
 	public Market() {
 		
