@@ -1,9 +1,13 @@
 package exceptions;
 
-public class MaxCapacityException {
+public class MaxCapacityException extends ArmyException {
 
 	public MaxCapacityException() {
-		// TODO Auto-generated constructor stub
+		super();
+	}
+	
+	public MaxCapacityException(String s) {
+		super(s);
 	}
 
 }

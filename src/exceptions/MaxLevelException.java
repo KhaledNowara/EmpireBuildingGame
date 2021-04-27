@@ -1,9 +1,14 @@
 package exceptions;
 
-public class MaxLevelException {
+public class MaxLevelException extends EmpireException{
 
 	public MaxLevelException() {
-		// TODO Auto-generated constructor stub
+		super();
+		
+	}
+	public MaxLevelException(String s) {
+		super(s);
+		
 	}
 
 }

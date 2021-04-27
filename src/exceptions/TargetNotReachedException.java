@@ -1,9 +1,13 @@
 package exceptions;
 
-public class TargetNotReachedException {
+public class TargetNotReachedException extends ArmyException{
 
 	public TargetNotReachedException() {
-		// TODO Auto-generated constructor stub
+		super();
+	}
+	
+	public TargetNotReachedException(String s) {
+		super(s);
 	}
 
 }

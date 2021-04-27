@@ -1,9 +1,12 @@
 package exceptions;
 
-public class MaxRecruitedException {
+public class MaxRecruitedException extends EmpireException{
 
 	public MaxRecruitedException() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
-
+	
+	public MaxRecruitedException(String s) {
+		super(s);
+	}
 }
