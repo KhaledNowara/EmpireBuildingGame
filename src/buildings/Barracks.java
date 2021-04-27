@@ -1,9 +1,10 @@
 package buildings;
 
-public class Barracks {
+public class Barracks extends MilitaryBuilding{
 
 	public Barracks() {
-		// TODO Auto-generated constructor stub
+		
+		super(200,1000,500);
 	}
 
 }

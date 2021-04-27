@@ -1,9 +1,12 @@
 package buildings;
 
-public class ArcheryRange {
+public class ArcheryRange extends MilitaryBuilding{
 
 	public ArcheryRange() {
-		// TODO Auto-generated constructor stub
+		
+		super(1500,800,400);
 	}
+	
+	
 
 }

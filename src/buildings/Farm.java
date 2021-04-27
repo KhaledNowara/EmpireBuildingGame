@@ -1,9 +1,11 @@
 package buildings;
 
-public class Farm {
-
+public class Farm extends EconomicBuilding{
+	
 	public Farm() {
-		// TODO Auto-generated constructor stub
+		super(1000,500);
+		
+		
 	}
 
 }

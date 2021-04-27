@@ -1,9 +1,10 @@
 package buildings;
 
-public class Stable {
+public class Stable extends MilitaryBuilding {
 
 	public Stable() {
-		// TODO Auto-generated constructor stub
+		
+		super(2500,1500,600);
 	}
 
 }

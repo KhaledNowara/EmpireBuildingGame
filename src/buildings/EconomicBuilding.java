@@ -1,9 +1,13 @@
 package buildings;
 
-public class EconomicBuilding {
+abstract public class EconomicBuilding extends Building {
 
-	public EconomicBuilding() {
-		// TODO Auto-generated constructor stub
+	public EconomicBuilding(int cost, int upgradeCost) {
+		
+		super(cost,upgradeCost);
+		
 	}
+	
+	
 
 }

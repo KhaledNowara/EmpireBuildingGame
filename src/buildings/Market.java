@@ -3,7 +3,8 @@ package buildings;
 public class Market {
 
 	public Market() {
-		// TODO Auto-generated constructor stub
+		
+		super(1500,700);
 	}
 
 }
