@@ -1,9 +1,13 @@
 package exceptions;
 
-public class BuildingException {
+abstract public class BuildingException extends EmpireException{
 
 	public BuildingException() {
-		// TODO Auto-generated constructor stub
+		super();
+	}
+	
+	public BuildingException(String s) {
+		super(s);
 	}
 
 }

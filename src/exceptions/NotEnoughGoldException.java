@@ -1,9 +1,12 @@
 package exceptions;
 
-public class NotEnoughGoldException {
+public class NotEnoughGoldException extends EmpireException{
 
 	public NotEnoughGoldException() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
+	public NotEnoughGoldException(String s) {
+		super(s);
+	}
 }

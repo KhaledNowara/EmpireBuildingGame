@@ -1,9 +1,13 @@
 package exceptions;
 
-public class FriendlyFireException {
+public class FriendlyFireException extends ArmyException{
 
 	public FriendlyFireException() {
-		// TODO Auto-generated constructor stub
+		super();
+	}
+	
+	public FriendlyFireException(String s) {
+		super(s);
 	}
 
 }

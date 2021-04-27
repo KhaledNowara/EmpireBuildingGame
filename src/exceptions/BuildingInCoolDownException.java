@@ -1,9 +1,13 @@
 package exceptions;
 
-public class BuildingInCoolDownException {
+public class BuildingInCoolDownException extends EmpireException {
 
 	public BuildingInCoolDownException() {
-		// TODO Auto-generated constructor stub
+		super();
+	}
+	
+	public BuildingInCoolDownException(String s) {
+		super(s);
 	}
 
 }

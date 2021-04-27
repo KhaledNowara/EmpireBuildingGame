@@ -1,9 +1,14 @@
 package exceptions;
 
-public class ArmyException {
+abstract public class ArmyException extends EmpireException {
 
 	public ArmyException() {
-		// TODO Auto-generated constructor stub
+		super();
+	}
+	
+	public ArmyException(String s) {
+		super(s);
+
 	}
 
 }
