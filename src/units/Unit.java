@@ -7,11 +7,10 @@ abstract public class Unit {
 	private double idleUpkeep;
 	private double marchingUpkeep;
 	private double siegeUpkeep;
-
-	public Unit(int level,int maxSoldierCount,int currentSoldierCount,double idleUpkeep,double marchingUpkeep,double siegeUpkeep) {
+	// currentSoldierCount is not passed as a parameter int the constructor
+	public Unit(int level,int maxSoldierCount,double idleUpkeep,double marchingUpkeep,double siegeUpkeep) {
 		this.level=level;
 		this.maxSoldierCount=maxSoldierCount;
-		this.currentSoldierCount=currentSoldierCount;
 		this.idleUpkeep=idleUpkeep;
 		this.marchingUpkeep=marchingUpkeep;
 		this.siegeUpkeep=siegeUpkeep;
