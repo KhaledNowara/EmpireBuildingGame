@@ -18,9 +18,10 @@ abstract public class MilitaryBuilding extends Building{
     	return this.recruitmentCost;
     }
     
+    //setters do not return 
     public void setRecruitmentCost(int r)
     {
-    	return this.recruitmentCost=r;
+    	this.recruitmentCost=r;
     }
     
     public int getCurrentRecruit()

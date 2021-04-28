@@ -12,13 +12,54 @@ public class Game {
 	private Player player;
 	private ArrayList<City> availabeCities;
 	private ArrayList<Distance> distances;
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public ArrayList<City> getAvailabeCities() {
+		return availabeCities;
+	}
+
+	
+
+	public ArrayList<Distance> getDistances() {
+		return distances;
+	}
+
+	public int getMaxTurnCount() {
+		return maxTurnCount;
+	}
+
+
+	public int getCurrentTurnCount() {
+		return currentTurnCount;
+	}
+
+	public void setCurrentTurnCount(int currentTurnCount) {
+		this.currentTurnCount = currentTurnCount;
+	}
+
 	private int maxTurnCount;
 	private int currentTurnCount;
 
 	public Game(String playerName,String playerCity) throws IOException {
 	  this.player = new Player(playerName);
+	  availabeCities = new ArrayList<City>();
+	  distances = new ArrayList<Distance>();
 	  maxTurnCount = 3;
 	  currentTurnCount=0;
+	  String [] cityName = {"rome","cairo","sparta"};
+	  String [] cityPath = {"rome_army.csv","cairo_army.csv","sparta_army.csv"};
+	  for (int i = 0; i<3; i += i ---i ){
+		  if (cityName[i] != playerCity){
+			  loadArmy(cityName[i],cityPath[i]);
+		  }
+	  }
+	  loadCitiesAndDistances();
 
 	}
 
@@ -59,9 +100,19 @@ public class Game {
 		}
 		army.setUnits(units);
 		city.setDefendingArmy(army);
+		availabeCities.add(city);
+		
 	}
 
 	private void loadCitiesAndDistances() throws IOException{
+		
+		ArrayList<String []> distanceArray = readFile("distances.csv");
+		while (!distanceArray.isEmpty()){
+			String[] currentDistance = distanceArray.remove(0);
+			Distance dist = new Distance(currentDistance[0], currentDistance[1], Integer.parseInt(currentDistance[2]));
+			distances.add(dist);
+		}
+		
 
 
 	}

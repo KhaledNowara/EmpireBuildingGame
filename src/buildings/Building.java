@@ -27,7 +27,8 @@
 		return this.level;
 	}
 	
-	public void setLevel(level l)
+	//level type is int
+	public void setLevel(int l)
 	{
 		this.level=l;
 	}
@@ -37,9 +38,10 @@
 		return this.upgradeCost;
 	}
 	
+	//setters does not return
 	public void setUpgradeCost(int u)
 	{
-		return this.upgradeCost=u;
+		 this.upgradeCost=u;
 	}
 	
 	
@@ -48,9 +50,10 @@
 		return this.coolDown;
 	}
 	
+	//setters does not return 
 	public void setCoolDown(boolean c)
 	{
-		return this.coolDown=c;
+		 this.coolDown=c;
 	}
 	
 	

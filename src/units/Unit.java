@@ -32,7 +32,7 @@ abstract public class Unit {
 	public int getCurrentSoldierCount() {
 		return currentSoldierCount;
 	}
-	public int setCurrentSoldierCount(int c) {
+	public void setCurrentSoldierCount(int c) {
 		currentSoldierCount=c;
 	}
 	
