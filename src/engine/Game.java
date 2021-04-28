@@ -10,7 +10,7 @@ public class Game {
 
 	
 	private Player player;
-	private ArrayList<City> availabeCities;
+	private ArrayList<City> availableCities;
 	private ArrayList<Distance> distances;
 	public Player getPlayer() {
 		return player;
@@ -20,8 +20,8 @@ public class Game {
 		this.player = player;
 	}
 
-	public ArrayList<City> getAvailabeCities() {
-		return availabeCities;
+	public ArrayList<City> getAvailableCities() {
+		return availableCities;
 	}
 
 	
@@ -48,12 +48,12 @@ public class Game {
 
 	public Game(String playerName,String playerCity) throws IOException {
 	  this.player = new Player(playerName);
-	  availabeCities = new ArrayList<City>();
+	  availableCities = new ArrayList<City>();
 	  distances = new ArrayList<Distance>();
-	  maxTurnCount = 3;
-	  currentTurnCount=0;
-	  String [] cityName = {"rome","cairo","sparta"};
-	  String [] cityPath = {"rome_army.csv","cairo_army.csv","sparta_army.csv"};
+	  maxTurnCount = 30;
+	  currentTurnCount=1;
+	  String [] cityName = {"rome","sparta","cairo"};
+	  String [] cityPath = {"rome_army.csv","sparta_army.csv","cairo_army.csv",};
 	  for (int i = 0; i<3; i += i ---i ){
 		  if (cityName[i] != playerCity){
 			  loadArmy(cityName[i],cityPath[i]);
@@ -100,7 +100,7 @@ public class Game {
 		}
 		army.setUnits(units);
 		city.setDefendingArmy(army);
-		availabeCities.add(city);
+		availableCities.add(city);
 		
 	}
 

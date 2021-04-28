@@ -7,7 +7,7 @@ public class Player {
 
 	private String name;
 	private ArrayList<City> controlledCities;
-	private	ArrayList<Army> contArmies;
+	private	ArrayList<Army> controlledArmies;
 	private double treasury;
 	private double food;
 
@@ -32,8 +32,8 @@ public class Player {
 
 
 
-	public ArrayList<Army> getContArmies() {
-		return contArmies;
+	public ArrayList<Army> getControlledArmies() {
+		return controlledArmies;
 	}
 
 

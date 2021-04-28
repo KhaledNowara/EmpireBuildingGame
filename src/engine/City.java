@@ -8,11 +8,11 @@ import units.Army;
 
 public class City {
 	private String name;
-	private ArrayList<EconomicBuilding> economicBuildings;
+	private ArrayList<EconomicBuilding> economicalBuildings;
 	private ArrayList<MilitaryBuilding> militaryBuildings;
 	private Army defendingArmy;
 	private int turnsUnderSiege;
-	private boolean underSiege = false;
+	private boolean underSiege;
 
 	public String getName() {
 		return name;
@@ -20,8 +20,8 @@ public class City {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public ArrayList<EconomicBuilding> getEconomicBuildings() {
-		return economicBuildings;
+	public ArrayList<EconomicBuilding> getEconomicalBuildings() {
+		return economicalBuildings;
 	}
 	
 	public ArrayList<MilitaryBuilding> getMilitaryBuildings() {
@@ -48,6 +48,10 @@ public class City {
 	}
 	public City(String name) {
 		this.name = name;
+		this.economicalBuildings =new ArrayList<EconomicBuilding>();
+		this.militaryBuildings = new ArrayList<MilitaryBuilding>();
+		turnsUnderSiege = 0;
+		underSiege = false;
 	}
 
 }
