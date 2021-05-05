@@ -1,6 +1,6 @@
 package exceptions;
 
-public class BuildingInCoolDownException extends EmpireException {
+public class BuildingInCoolDownException extends BuildingException {
 
 	public BuildingInCoolDownException() {
 		super();

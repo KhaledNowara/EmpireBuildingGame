@@ -12,39 +12,32 @@ public class Game {
 	private Player player;
 	private ArrayList<City> availableCities;
 	private ArrayList<Distance> distances;
+	private int maxTurnCount;
+	private int currentTurnCount;
+
 	public Player getPlayer() {
 		return player;
 	}
-
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-
 	public ArrayList<City> getAvailableCities() {
 		return availableCities;
 	}
-
-	
-
 	public ArrayList<Distance> getDistances() {
 		return distances;
 	}
-
 	public int getMaxTurnCount() {
 		return maxTurnCount;
 	}
-
-
 	public int getCurrentTurnCount() {
 		return currentTurnCount;
 	}
-
 	public void setCurrentTurnCount(int currentTurnCount) {
 		this.currentTurnCount = currentTurnCount;
 	}
 
-	private int maxTurnCount;
-	private int currentTurnCount;
+	
 
 	public Game(String playerName,String playerCity) throws IOException {
 	  this.player = new Player(playerName);
@@ -52,12 +45,18 @@ public class Game {
 	  distances = new ArrayList<Distance>();
 	  maxTurnCount = 30;
 	  currentTurnCount=1;
-	  String [] cityName = {"rome","sparta","cairo"};
+	  String [] cityName = {"Rome","Sparta","Cairo"};
 	  String [] cityPath = {"rome_army.csv","sparta_army.csv","cairo_army.csv",};
-	  for (int i = 0; i<3; i += i ---i ){
-		  if (cityName[i] != playerCity){
+	  for (int i = 0; i<3; i+=i---i ){
+		City city = new City(cityName[i]);
+		availableCities.add(city);
+		if (!cityName[i].equals(playerCity)){
+			
 			  loadArmy(cityName[i],cityPath[i]);
 		  }
+		else {
+			player.getControlledCities().add(city);
+		}
 	  }
 	  loadCitiesAndDistances();
 
@@ -76,13 +75,11 @@ public class Game {
 		}
 
 	public void loadArmy(String cityName,String path) throws IOException{
-		City city = new City(cityName);
-		
+		City city = availableCities.get(availableCities.size()-1);
+		city.setDefendingArmy(new Army(cityName));
 		ArrayList <String[]> armyUnits = readFile(path);
-		Army army = new Army(cityName);
-		army.setCurrentLocation(cityName);
-		army.setCurrentStatus(Status.IDLE);
-		ArrayList<Unit> units = new ArrayList<Unit>();
+		Army army = city.getDefendingArmy();
+		ArrayList<Unit> units = army.getUnits();
 		while (!armyUnits.isEmpty()){
 			String [] currentUnit = armyUnits.remove(0);
 			int level = Integer.parseInt(currentUnit[1]) - 1;
@@ -94,13 +91,13 @@ public class Game {
 			switch (currentUnit[0]){
 
 				case "Archer" : units.add(new Archer(Integer.parseInt(aV[0]),Integer.parseInt(aV[1]),Double.parseDouble(aV[2]),Double.parseDouble(aV[3]),Double.parseDouble(aV[4])));
-				case "Cavalry" : units.add(new Archer(Integer.parseInt(cV[0]),Integer.parseInt(cV[1]),Double.parseDouble(cV[2]),Double.parseDouble(cV[3]),Double.parseDouble(cV[4])));
-				case "Infantary" : units.add(new Archer(Integer.parseInt(iV[0]),Integer.parseInt(iV[1]),Double.parseDouble(iV[2]),Double.parseDouble(iV[3]),Double.parseDouble(iV[4])));
+				break;
+				case "Cavalry" : units.add(new Cavalry(Integer.parseInt(cV[0]),Integer.parseInt(cV[1]),Double.parseDouble(cV[2]),Double.parseDouble(cV[3]),Double.parseDouble(cV[4])));
+				break;
+				case "Infantry" : units.add(new Infantry(Integer.parseInt(iV[0]),Integer.parseInt(iV[1]),Double.parseDouble(iV[2]),Double.parseDouble(iV[3]),Double.parseDouble(iV[4])));
+				break;
 			}
 		}
-		army.setUnits(units);
-		city.setDefendingArmy(army);
-		availableCities.add(city);
 		
 	}
 

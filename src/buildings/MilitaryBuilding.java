@@ -10,6 +10,8 @@ abstract public class MilitaryBuilding extends Building{
 		
 		super(cost,upgradeCost);
 		this.recruitmentCost=recruitmentCost;
+        this.maxRecruit=3;
+
 		
 	}
 	
@@ -34,7 +36,7 @@ abstract public class MilitaryBuilding extends Building{
     	this.currentRecruit=c;
     }
     
-    public int maxRecruit()
+    public int getMaxRecruit()
     {
     	return this.maxRecruit;
     }

@@ -1,6 +1,6 @@
 package exceptions;
 
-public class MaxLevelException extends EmpireException{
+public class MaxLevelException extends BuildingException{
 
 	public MaxLevelException() {
 		super();

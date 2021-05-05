@@ -69,6 +69,9 @@ public class Player {
 		this.name = name;
 		this.food = 0;
 		this.treasury = 0;
+		controlledCities = new ArrayList<City>();
+		controlledArmies = new ArrayList<Army>();
+
 	}
 
 }
