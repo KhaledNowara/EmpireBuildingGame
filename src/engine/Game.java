@@ -12,7 +12,7 @@ public class Game {
 	private Player player;
 	private ArrayList<City> availableCities;
 	private ArrayList<Distance> distances;
-	private int maxTurnCount;
+	final private int maxTurnCount;
 	private int currentTurnCount;
 
 	public Player getPlayer() {
