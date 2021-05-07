@@ -4,7 +4,7 @@ abstract public class MilitaryBuilding extends Building{
     
 	private int recruitmentCost ;
 	private int currentRecruit;
-	private int maxRecruit;
+	final private int maxRecruit;
 	
 	public MilitaryBuilding(int cost, int upgradeCost,int recruitmentCost ) {
 		
