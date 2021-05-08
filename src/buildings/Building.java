@@ -45,11 +45,13 @@
 	}
 	
 	
-	public boolean getCoolDown()
-	{
-		return this.coolDown;
-	}
 	
+	
+	public boolean isCoolDown() {
+		return coolDown;
+	}
+
+
 	//setters does not return 
 	public void setCoolDown(boolean c)
 	{
