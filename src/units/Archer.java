@@ -17,7 +17,7 @@ public class Archer extends Unit{
 		}
 		catch (Exception e){
 			System.out.println("file not found");
-			return new Infantry(0, 0, 0, 0, 0);
+			return new Archer(0, 0, 0, 0, 0);
 		}		
 	}
 
