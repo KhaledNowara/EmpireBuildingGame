@@ -22,9 +22,8 @@ public class Archer extends Unit{
 	}
 
 	public void attack (Unit target) throws FriendlyFireException{
-       target.archerHurt(getLevel(),getCurrentSoldierCount());
-
-
+		super.attack(target);
+		target.archerHurt(getLevel(),getCurrentSoldierCount());
 	}
 
 	public void archerHurt(int level, int SoldierCount)
@@ -35,30 +34,39 @@ public class Archer extends Unit{
 			case 3: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.5));break;
 		}
 		if(getCurrentSoldierCount() <= 0){
+			setCurrentSoldierCount(0);
 			getParentArmy().getUnits().remove(this);
 		}
 	}
 
 
 
-	public void CavalryHurt(int level, int SoldierCount) {
+	public void cavalryHurt(int level, int SoldierCount) {
 		switch(level){
-			case 1: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.1));break;
-			case 2: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.2));break;
-			case 3: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.25));break;
+			case 1: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.5));break;
+			case 2: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.6));break;
+			case 3: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.7));break;
 
+		}
+		if(getCurrentSoldierCount() <= 0){
+			setCurrentSoldierCount(0);
+			getParentArmy().getUnits().remove(this);
 		}
 		
 	}
 
 
 
-	public void InfantryHurt(int level, int SoldierCount) {
+	public void infantryHurt(int level, int SoldierCount) {
 		switch(level){
 			case 1: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.1));break;
 			case 2: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.2));break;
 			case 3: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.3));break;
 
+		}
+		if(getCurrentSoldierCount() <= 0){
+			setCurrentSoldierCount(0);
+			getParentArmy().getUnits().remove(this);
 		}
 		
 	}

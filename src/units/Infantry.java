@@ -1,8 +1,6 @@
 package units;
-
-import java.io.IOException;
-
 import engine.Game;
+import exceptions.*;
 
 public class Infantry extends Unit{
 
@@ -19,9 +17,49 @@ public class Infantry extends Unit{
 			return new Infantry(0, 0, 0, 0, 0);
 		}
 
+	}
 
+	public void attack (Unit target) throws FriendlyFireException{
+		super.attack(target);
+		target.infantryHurt(getLevel(),getCurrentSoldierCount());
+	}
+	
+	public void archerHurt(int level, int SoldierCount) {
+		switch(level){
+			case 1: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.2));break;
+			case 2: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.3));break;
+			case 3: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.4));break;
+		}
+		if(getCurrentSoldierCount() <= 0){
+			setCurrentSoldierCount(0);
+			getParentArmy().getUnits().remove(this);
+		}
 		
-
-				
+	}
+	
+	public void cavalryHurt(int level, int SoldierCount) {
+		switch(level){
+			case 1: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.3));break;
+			case 2: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.4));break;
+			case 3: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.5));break;
+		}
+		if(getCurrentSoldierCount() <= 0){
+			setCurrentSoldierCount(0);
+			getParentArmy().getUnits().remove(this);
+		}
+		
+	}
+	
+	public void infantryHurt(int level, int SoldierCount) {
+		switch(level){
+			case 1: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.1));break;
+			case 2: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.2));break;
+			case 3: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.3));break;
+		}
+		if(getCurrentSoldierCount() <= 0){
+			setCurrentSoldierCount(0);
+			getParentArmy().getUnits().remove(this);
+		}
+		
 	}
 }

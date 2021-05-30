@@ -1,6 +1,7 @@
 package units;
 
 import engine.Game;
+import exceptions.FriendlyFireException;
 
 public class Cavalry extends Unit{
 
@@ -16,6 +17,48 @@ public class Cavalry extends Unit{
 		catch (Exception e){
 			System.out.println("file not found");
 			return new Infantry(0, 0, 0, 0, 0);
+		}
+		
+	}
+	public void attack (Unit target) throws FriendlyFireException{
+		super.attack(target);
+		target.cavalryHurt(getLevel(),getCurrentSoldierCount());
+	}
+	public void archerHurt(int level, int SoldierCount) {
+		switch(level){
+			case 1: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.1));break;
+			case 2: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.1));break;
+			case 3: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.2));break;
+		}
+		if(getCurrentSoldierCount() <= 0){
+			setCurrentSoldierCount(0);
+			getParentArmy().getUnits().remove(this);
+		}
+		
+	}
+	
+	public void cavalryHurt(int level, int SoldierCount) {
+		switch(level){
+			case 1: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.2));break;
+			case 2: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.2));break;
+			case 3: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.3));break;
+		}
+		if(getCurrentSoldierCount() <= 0){
+			setCurrentSoldierCount(0);
+			getParentArmy().getUnits().remove(this);
+		}
+		
+	}
+	
+	public void infantryHurt(int level, int SoldierCount) {
+		switch(level){
+			case 1: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.1));break;
+			case 2: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.2));break;
+			case 3: setCurrentSoldierCount((int)(getCurrentSoldierCount()-SoldierCount*0.25));break;
+		}
+		if(getCurrentSoldierCount() <= 0){
+			setCurrentSoldierCount(0);
+			getParentArmy().getUnits().remove(this);
 		}
 		
 	}

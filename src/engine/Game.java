@@ -84,17 +84,13 @@ public class Game {
 			String [] currentUnit = armyUnits.remove(0);
 			int level = Integer.parseInt(currentUnit[1]) - 1;
 			
-			String[] aV = readFile("archer.csv").get(level);
-			String[] cV = readFile("cavalry.csv").get(level);
-			String[] iV = readFile("infantary.csv").get(level);
-
 			switch (currentUnit[0]){
 
-				case "Archer" : units.add(new Archer(Integer.parseInt(aV[0]),Integer.parseInt(aV[1]),Double.parseDouble(aV[2]),Double.parseDouble(aV[3]),Double.parseDouble(aV[4])));
+				case "Archer" : units.add(Archer.createUnit(level));
 				break;
-				case "Cavalry" : units.add(new Cavalry(Integer.parseInt(cV[0]),Integer.parseInt(cV[1]),Double.parseDouble(cV[2]),Double.parseDouble(cV[3]),Double.parseDouble(cV[4])));
+				case "Cavalry" : units.add(Cavalry.createUnit(level));
 				break;
-				case "Infantry" : units.add(new Infantry(Integer.parseInt(iV[0]),Integer.parseInt(iV[1]),Double.parseDouble(iV[2]),Double.parseDouble(iV[3]),Double.parseDouble(iV[4])));
+				case "Infantry" : units.add(Infantry.createUnit(level));
 				break;
 			}
 		}

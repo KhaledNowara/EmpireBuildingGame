@@ -72,8 +72,8 @@ abstract public class Unit {
 
 
 	 public abstract void archerHurt(int level, int SoldierCount);
-	 public abstract void CavalryHurt(int level, int SoldierCount);
-	 public abstract void InfantryHurt(int level, int SoldierCount);
+	 public abstract void cavalryHurt(int level, int SoldierCount);
+	 public abstract void infantryHurt(int level, int SoldierCount);
 	
 	
 
