@@ -24,7 +24,12 @@ public class ArcheryRange extends MilitaryBuilding{
 	
 	}
 	public Unit recruit() throws BuildingInCoolDownException, MaxRecruitedException{
-			return Archer.createUnit(super.getLevel());
+		if(isCoolDown())throw new BuildingInCoolDownException();
+		if(getCurrentRecruit()==getMaxRecruit()) throw new MaxRecruitedException();
+		
+		setCoolDown(true);
+		setCurrentRecruit(getCurrentRecruit() + 1);	
+		return Archer.createUnit(super.getLevel());
 		
 	}
  

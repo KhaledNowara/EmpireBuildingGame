@@ -16,7 +16,7 @@ public class Market extends EconomicBuilding {
 	}
 
 	public int harvest () {
-		switch (super.getLevel()){
+		switch (getLevel()){
 			case 1: return 1000; 
 			case 2: return 1500; 
 			case 3: return 2000;

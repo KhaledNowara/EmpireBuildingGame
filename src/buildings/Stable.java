@@ -25,6 +25,11 @@ public class Stable extends MilitaryBuilding {
 	}
 
 	public Unit recruit() throws BuildingInCoolDownException, MaxRecruitedException{
+		if(isCoolDown())throw new BuildingInCoolDownException();
+		if(getCurrentRecruit()==getMaxRecruit()) throw new MaxRecruitedException();
+		
+		setCoolDown(true);
+		setCurrentRecruit(getCurrentRecruit() + 1);
 		return Cavalry.createUnit(super.getLevel());
 	
 }
