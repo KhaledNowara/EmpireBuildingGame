@@ -45,6 +45,7 @@ abstract public class MilitaryBuilding extends Building{
     	return this.maxRecruit;
     }
 
+
     public abstract Unit recruit() throws BuildingInCoolDownException, MaxRecruitedException;
 
 }

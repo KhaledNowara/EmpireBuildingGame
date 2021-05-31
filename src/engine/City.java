@@ -50,6 +50,7 @@ public class City {
 		this.militaryBuildings = new ArrayList<MilitaryBuilding>();
 		turnsUnderSiege = 0;
 		underSiege = false;
+		defendingArmy = new Army(name);
 	}
 
 }

@@ -32,7 +32,7 @@ public class Infantry extends Unit{
 		}
 		if(getCurrentSoldierCount() <= 0){
 			setCurrentSoldierCount(0);
-			getParentArmy().getUnits().remove(this);
+			getParentArmy().handleAttackedUnit(this);
 		}
 		
 	}

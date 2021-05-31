@@ -1,5 +1,7 @@
 package units;
 import java.util.ArrayList;
+
+import exceptions.MaxCapacityException;
 public class Army {
 	private Status currentStatus;
 	private ArrayList<Unit> units;
@@ -63,6 +65,40 @@ public class Army {
 	public int getMaxToHold() {
 		return maxToHold;
 	}
+	
+	public void relocateUnit(Unit unit) throws MaxCapacityException{
+		if (units.size()<maxToHold) throw new MaxCapacityException();
+		units.add(unit);
+		unit.getParentArmy().getUnits().remove(unit);
+		unit.setParentArmy(this);
+	}
+	
+	public void handleAttackedUnit(Unit u){
+		if(u.getCurrentSoldierCount()==0){
+			units.remove(u);
+		}
+	}
+
+
+	public double foodNeeded()
+	{   
+		double sum=0;
+        for(Unit u: units){
+
+          switch (this.currentStatus){
+			 case IDLE:  sum += (u.getIdleUpkeep()*u.getCurrentSoldierCount());break;
+			 case MARCHING: sum=sum+(u.getMarchingUpkeep()*u.getCurrentSoldierCount());break;
+			 case BESIEGING: sum=sum+(u.getSiegeUpkeep()*u.getCurrentSoldierCount());break;
+		  }
+       
+		}
+
+		return sum;
+
+
+	}
+
+
 	
 
 }

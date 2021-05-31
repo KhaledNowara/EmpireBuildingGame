@@ -28,7 +28,7 @@ public class Barracks extends MilitaryBuilding{
 		if(getCurrentRecruit()==getMaxRecruit()) throw new MaxRecruitedException();
 		
 		setCoolDown(true);
-		setCurrentRecruit(getCurrentRecruit() + 1);
+		setCurrentRecruit(getCurrentRecruit() + 1); 
 		return Infantry.createUnit(super.getLevel());
 	
 }
