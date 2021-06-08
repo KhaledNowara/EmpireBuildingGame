@@ -18,6 +18,17 @@ abstract public class Unit {
 		this.marchingUpkeep=marchingUpkeep;
 		this.siegeUpkeep=siegeUpkeep;
 		this.currentSoldierCount=maxSoldierCount;
+		this.parentArmy = new Army("");
+
+	}
+	public Unit(int level,int maxSoldierCount,double idleUpkeep,double marchingUpkeep,double siegeUpkeep,Army parentArmy) {
+		this.level=level;
+		this.maxSoldierCount=maxSoldierCount;
+		this.idleUpkeep=idleUpkeep;
+		this.marchingUpkeep=marchingUpkeep;
+		this.siegeUpkeep=siegeUpkeep;
+		this.currentSoldierCount=maxSoldierCount;
+		this.parentArmy = parentArmy;
 
 	}
 	
@@ -64,10 +75,11 @@ abstract public class Unit {
 	}
 
 	public void attack (Unit target) throws FriendlyFireException{
+		if (parentArmy != null){
 		if(parentArmy.getUnits().contains(target))
 		{
 			throw new FriendlyFireException();
-		}
+		}}
 	}
 
 

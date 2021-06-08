@@ -1,7 +1,11 @@
 package buildings;
 
+import engine.City;
+import engine.Player;
 import exceptions.BuildingInCoolDownException;
 import exceptions.MaxRecruitedException;
+import exceptions.NotEnoughGoldException;
+import units.Army;
 import units.Unit;
 
 abstract public class MilitaryBuilding extends Building{
@@ -47,5 +51,16 @@ abstract public class MilitaryBuilding extends Building{
 
 
     public abstract Unit recruit() throws BuildingInCoolDownException, MaxRecruitedException;
+    public abstract Unit recruit(Army a) throws BuildingInCoolDownException, MaxRecruitedException;
+    public void build(Player p,City C ) throws NotEnoughGoldException {
+        if (p.getTreasury()< this.getCost())throw new NotEnoughGoldException();
+        for(MilitaryBuilding b : C.getMilitaryBuildings()){
+			if (b.getClass().equals(this.getClass()))return;
+		}
+        C.getMilitaryBuildings().add(this);
+        p.setTreasury(p.getTreasury() - this.getCost());
+        setCoolDown(true);
+    } 
+
 
 }

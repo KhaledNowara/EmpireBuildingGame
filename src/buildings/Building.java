@@ -1,7 +1,10 @@
  package buildings;
 
+import engine.City;
+import engine.Player;
 import exceptions.BuildingInCoolDownException;
 import exceptions.MaxLevelException;
+import exceptions.NotEnoughGoldException;
 
 abstract public class Building {
 	 
@@ -9,6 +12,8 @@ abstract public class Building {
 	 private int level;
 	 private int upgradeCost;
 	 private boolean coolDown;
+	 
+
 
 	public Building(int cost,int upgradeCost ) {
 		
@@ -55,7 +60,6 @@ abstract public class Building {
 	}
 
 
-	//setters does not return 
 	public void setCoolDown(boolean c)
 	{
 		 this.coolDown=c;
@@ -68,6 +72,8 @@ abstract public class Building {
 		coolDown = true;
 
 	}	
+	
+	abstract public void build(Player p, City c) throws NotEnoughGoldException ;  
 	
 
 }

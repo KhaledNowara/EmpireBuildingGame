@@ -1,5 +1,7 @@
 package units;
 
+import java.io.IOException;
+
 import engine.Game;
 import exceptions.FriendlyFireException;
 
@@ -8,6 +10,9 @@ public class Cavalry extends Unit{
 	public Cavalry(int level,int maxSoldierCount,double idleUpkeep,double marchingUpkeep,double siegeUpkeep) {
 		super( level, maxSoldierCount, idleUpkeep, marchingUpkeep, siegeUpkeep);
 	}
+	public Cavalry(int level,int maxSoldierCount,double idleUpkeep,double marchingUpkeep,double siegeUpkeep, Army parentArmy) {
+		super( level, maxSoldierCount, idleUpkeep, marchingUpkeep, siegeUpkeep, parentArmy);
+	}
 
 	public static Unit createUnit(int level){
 		try{
@@ -15,7 +20,18 @@ public class Cavalry extends Unit{
 		return new Cavalry(Integer.parseInt(cV[0]),Integer.parseInt(cV[1]),Double.parseDouble(cV[2]),Double.parseDouble(cV[3]),Double.parseDouble(cV[4]));
 		}
 		catch (Exception e){
-			System.out.println("file not found");
+			System.out.println("file not found c");
+			return new Cavalry(0, 0, 0, 0, 0);
+		}
+		
+	}
+	public static Unit createUnit(int level, Army parentArmy){
+		try{
+		String[] cV = Game.readFile("cavalry.csv").get(level);
+		return new Cavalry(Integer.parseInt(cV[0]),Integer.parseInt(cV[1]),Double.parseDouble(cV[2]),Double.parseDouble(cV[3]),Double.parseDouble(cV[4]),parentArmy);
+		}
+		catch (IOException e){
+			System.out.println("file not  c ");
 			return new Cavalry(0, 0, 0, 0, 0);
 		}
 		
@@ -32,7 +48,7 @@ public class Cavalry extends Unit{
 		}
 		if(getCurrentSoldierCount() <= 0){
 			setCurrentSoldierCount(0);
-			getParentArmy().getUnits().remove(this);
+			getParentArmy().handleAttackedUnit(this);
 		}
 		
 	}
@@ -45,7 +61,7 @@ public class Cavalry extends Unit{
 		}
 		if(getCurrentSoldierCount() <= 0){
 			setCurrentSoldierCount(0);
-			getParentArmy().getUnits().remove(this);
+			getParentArmy().handleAttackedUnit(this);
 		}
 		
 	}

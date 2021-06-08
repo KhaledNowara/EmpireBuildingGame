@@ -2,6 +2,7 @@ package buildings;
 
 import exceptions.*;
 import units.Archer;
+import units.Army;
 import units.Unit;
 
 public class ArcheryRange extends MilitaryBuilding{
@@ -27,9 +28,18 @@ public class ArcheryRange extends MilitaryBuilding{
 		if(isCoolDown())throw new BuildingInCoolDownException();
 		if(getCurrentRecruit()==getMaxRecruit()) throw new MaxRecruitedException();
 		
-		setCoolDown(true);
+		
 		setCurrentRecruit(getCurrentRecruit() + 1);	
-		return Archer.createUnit(super.getLevel());
+		return Archer.createUnit(super.getLevel()-1);
+		
+	}
+	public Unit recruit(Army a) throws BuildingInCoolDownException, MaxRecruitedException{
+		if(isCoolDown())throw new BuildingInCoolDownException();
+		if(getCurrentRecruit()==getMaxRecruit()) throw new MaxRecruitedException();
+		
+		
+		setCurrentRecruit(getCurrentRecruit() + 1);	
+		return Archer.createUnit(super.getLevel() - 1,a );
 		
 	}
  

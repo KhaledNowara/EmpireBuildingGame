@@ -1,6 +1,7 @@
 package buildings;
 
 import exceptions.*;
+import units.Army;
 import units.Cavalry;
 import units.Unit;
 
@@ -27,11 +28,18 @@ public class Stable extends MilitaryBuilding {
 	public Unit recruit() throws BuildingInCoolDownException, MaxRecruitedException{
 		if(isCoolDown())throw new BuildingInCoolDownException();
 		if(getCurrentRecruit()==getMaxRecruit()) throw new MaxRecruitedException();
-		
-		setCoolDown(true);
+
 		setCurrentRecruit(getCurrentRecruit() + 1);
-		return Cavalry.createUnit(super.getLevel());
+		return Cavalry.createUnit(super.getLevel()-1);
 	
+}
+public Unit recruit(Army a) throws BuildingInCoolDownException, MaxRecruitedException{
+	if(isCoolDown())throw new BuildingInCoolDownException();
+	if(getCurrentRecruit()==getMaxRecruit()) throw new MaxRecruitedException();
+
+	setCurrentRecruit(getCurrentRecruit() + 1);
+	return Cavalry.createUnit(super.getLevel()-1 ,a);
+
 }
 
 }

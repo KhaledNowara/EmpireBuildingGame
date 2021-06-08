@@ -1,5 +1,6 @@
 package buildings;
 
+import engine.Player;
 import exceptions.*;
 
 public class Market extends EconomicBuilding {
@@ -22,5 +23,8 @@ public class Market extends EconomicBuilding {
 			case 3: return 2000;
 		}
 		return -1;
+	}
+	public void harvest(Player p){
+		p.setTreasury(p.getTreasury() + harvest());
 	}
 }

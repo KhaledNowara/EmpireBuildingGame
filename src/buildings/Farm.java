@@ -1,5 +1,7 @@
 package buildings;
 
+
+import engine.Player;
 import exceptions.*;
 
 public class Farm extends EconomicBuilding{
@@ -22,5 +24,8 @@ public class Farm extends EconomicBuilding{
 		}
 		return -1;
 	}	
+	public void harvest(Player p){
+		p.setFood(p.getFood() + harvest());
+	}
 
 }
