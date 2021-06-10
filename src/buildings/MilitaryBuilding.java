@@ -5,7 +5,6 @@ import engine.Player;
 import exceptions.BuildingInCoolDownException;
 import exceptions.MaxRecruitedException;
 import exceptions.NotEnoughGoldException;
-import units.Army;
 import units.Unit;
 
 abstract public class MilitaryBuilding extends Building{
@@ -28,7 +27,6 @@ abstract public class MilitaryBuilding extends Building{
     	return this.recruitmentCost;
     }
     
-    //setters do not return 
     public void setRecruitmentCost(int r)
     {
     	this.recruitmentCost=r;
@@ -51,7 +49,6 @@ abstract public class MilitaryBuilding extends Building{
 
 
     public abstract Unit recruit() throws BuildingInCoolDownException, MaxRecruitedException;
-    public abstract Unit recruit(Army a) throws BuildingInCoolDownException, MaxRecruitedException;
     public void build(Player p,City C ) throws NotEnoughGoldException {
         if (p.getTreasury()< this.getCost())throw new NotEnoughGoldException();
         for(MilitaryBuilding b : C.getMilitaryBuildings()){

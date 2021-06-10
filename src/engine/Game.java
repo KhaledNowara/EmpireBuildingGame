@@ -117,14 +117,16 @@ public class Game {
 	}
 
 	public void targetCity(Army army, String targetName){
-		if(army.getCurrentStatus().equals(Status.IDLE)){
+		if(!army.getCurrentStatus().equals(Status.MARCHING)){
 			int distanceDiff=0;
 			for(int i=0; i<distances.size(); i++){
 				if(
 				(distances.get(i).getFrom().equals(army.getCurrentLocation()) && distances.get(i).getTo().equals(targetName) )|| 
 				(distances.get(i).getTo().equals(army.getCurrentLocation()) && distances.get(i).getFrom().equals(targetName))
-				)
+				){
 				distanceDiff = distances.get(i).getDistance();
+				break;
+				}
 			}
 			army.setDistancetoTarget(distanceDiff);
 			army.setTarget(targetName);
@@ -144,8 +146,7 @@ public class Game {
 	}
 
 	public void endTurn (){
-		//isGameOver()
-
+	
 		currentTurnCount += currentTurnCount ---currentTurnCount;
 		for ( City c :player.getControlledCities())	{
 			for ( EconomicBuilding b : c.getEconomicalBuildings() ){
@@ -157,7 +158,6 @@ public class Game {
 				b.setCurrentRecruit(0);
 			}
 		}
-
 		for (Army a : player.getControlledArmies() ){
 			player.setFood(player.getFood() - a.foodNeeded());
 			if (player.getFood() <= 0 ){
@@ -170,7 +170,8 @@ public class Game {
 				a.setDistancetoTarget(a.getDistancetoTarget() - 1);
 				if (a.getDistancetoTarget() == 0){
 					a.setCurrentLocation(a.getTarget());
-					a.setTarget("");
+					a.setTarget(""); 
+					a.setDistancetoTarget(-1);
 					a.setCurrentStatus(Status.IDLE);
 				}
 			}
@@ -181,10 +182,9 @@ public class Game {
 				for(Unit u: c.getDefendingArmy().getUnits()){
 					u.setCurrentSoldierCount((int)(u.getCurrentSoldierCount()*0.9));
 				}
-
 			}
 		}
-
+	
 	}
 
 	public void occupy(Army a,String cityName){
@@ -201,7 +201,7 @@ public class Game {
 	}
 
 	public void autoResolve(Army attacker, Army defender) throws FriendlyFireException{
-		while(attacker.getUnits().size()!=0 && defender.getUnits().size()!=0){
+		while(attacker.getUnits().size()>0 && defender.getUnits().size()>0){
 				int aUnit = (int)Math.random()*attacker.getUnits().size();
 				int dUnit = (int)Math.random()*defender.getUnits().size();
 				attacker.getUnits().get(aUnit).attack(defender.getUnits().get(dUnit));
@@ -212,9 +212,9 @@ public class Game {
 				int dUnit2  = (int)Math.random()*defender.getUnits().size();
 				defender.getUnits().get(dUnit2).attack(attacker.getUnits().get(aUnit2));
 		}	
-				if(defender.getUnits().size()==0){
-					occupy(attacker, defender.getCurrentLocation());
-				}
+		if(defender.getUnits().size()==0){
+			occupy(attacker, defender.getCurrentLocation());
+		}
 		
 
 	}

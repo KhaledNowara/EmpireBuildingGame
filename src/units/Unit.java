@@ -18,7 +18,6 @@ abstract public class Unit {
 		this.marchingUpkeep=marchingUpkeep;
 		this.siegeUpkeep=siegeUpkeep;
 		this.currentSoldierCount=maxSoldierCount;
-		this.parentArmy = new Army("");
 
 	}
 	public Unit(int level,int maxSoldierCount,double idleUpkeep,double marchingUpkeep,double siegeUpkeep,Army parentArmy) {

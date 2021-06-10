@@ -133,7 +133,7 @@ public class Player {
 		}
 		if (treasury < Building.getRecruitmentCost()) throw new NotEnoughGoldException();
 
-		recruit = Building.recruit(c.getDefendingArmy());
+		recruit = Building.recruit();
 		recruit.setParentArmy(c.getDefendingArmy());
 		c.getDefendingArmy().getUnits().add(recruit);
 		treasury -= Building.getRecruitmentCost();
@@ -148,6 +148,7 @@ public class Player {
 		for(City city:controlledCities){
 			if (city.getName().equals(cityName)){
 				c = city;
+				if (!controlledCities.contains(city)) return;
 				break;
 			}
 		}
@@ -178,7 +179,7 @@ public class Player {
 	public void initiateArmy(City city,Unit unit)
 	{
 
-		Army A = new Army(city.getName());
+		Army A = new Army(city.getName() + "Attacking Army");
 		A.getUnits().add(unit);
 		city.getDefendingArmy().getUnits().remove(unit);
         unit.setParentArmy(A);

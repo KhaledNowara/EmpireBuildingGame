@@ -19,7 +19,7 @@ public class Cavalry extends Unit{
 		String[] cV = Game.readFile("cavalry.csv").get(level);
 		return new Cavalry(Integer.parseInt(cV[0]),Integer.parseInt(cV[1]),Double.parseDouble(cV[2]),Double.parseDouble(cV[3]),Double.parseDouble(cV[4]));
 		}
-		catch (Exception e){
+		catch (IOException e){
 			System.out.println("file not found c");
 			return new Cavalry(0, 0, 0, 0, 0);
 		}
