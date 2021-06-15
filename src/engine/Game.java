@@ -130,6 +130,7 @@ public class Game {
 			}
 			army.setDistancetoTarget(distanceDiff);
 			army.setTarget(targetName);
+			army.setCurrentLocation(targetName);
 
 		}
 	}
@@ -146,6 +147,7 @@ public class Game {
 	}
 
 	public void endTurn (){
+		
 	
 		currentTurnCount += currentTurnCount ---currentTurnCount;
 		for ( City c :player.getControlledCities())	{
@@ -160,12 +162,7 @@ public class Game {
 		}
 		for (Army a : player.getControlledArmies() ){
 			player.setFood(player.getFood() - a.foodNeeded());
-			if (player.getFood() <= 0 ){
-				player.setFood(0);
-				for(Unit unit: a.getUnits()){
-					unit.setCurrentSoldierCount((int)(unit.getCurrentSoldierCount()*0.9));
-				}
-			}
+			
 			if (a.getCurrentStatus().equals(Status.MARCHING)){
 				a.setDistancetoTarget(a.getDistancetoTarget() - 1);
 				if (a.getDistancetoTarget() == 0){
@@ -173,6 +170,15 @@ public class Game {
 					a.setTarget(""); 
 					a.setDistancetoTarget(-1);
 					a.setCurrentStatus(Status.IDLE);
+				}
+			}
+		}
+		if (player.getFood() < 0 ){
+			player.setFood(0);
+			for (Army a : player.getControlledArmies() ){
+			
+				for(Unit unit: a.getUnits()){
+					unit.setCurrentSoldierCount((int)(unit.getCurrentSoldierCount()*0.9));
 				}
 			}
 		}
@@ -195,6 +201,7 @@ public class Game {
 			availableCities.get(i).setDefendingArmy(a);
 		    availableCities.get(i).setUnderSiege(false);
 			availableCities.get(i).setTurnsUnderSiege(-1);
+			player.getControlledArmies().remove(a);
 		}
 		
 

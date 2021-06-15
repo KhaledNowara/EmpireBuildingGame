@@ -15,7 +15,7 @@ public class Barracks extends MilitaryBuilding{
 		super.upgrade();
 		if (getLevel() == 2){
 			setUpgradeCost(1500);
-			setRecruitmentCost(500);
+			setRecruitmentCost(550);
 		}
 		else if (getLevel()== 3){
 			setUpgradeCost(0);
