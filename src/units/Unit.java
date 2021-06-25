@@ -23,8 +23,8 @@ abstract public class Unit {
 	@Override
 	public String toString() {
 
-		return "[currentSoldierCount="  + ", level=" + level
-				+ ", maxSoldierCount=" + maxSoldierCount + "]";
+		return "[ level: " + level + ", Current Solider Count: " + currentSoldierCount 
+				+ ", maxSoldierCount: " + maxSoldierCount + "]";
 	}
 	public Unit(int level,int maxSoldierCount,double idleUpkeep,double marchingUpkeep,double siegeUpkeep,Army parentArmy) {
 		this.level=level;

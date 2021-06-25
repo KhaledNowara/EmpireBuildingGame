@@ -1,6 +1,5 @@
 package view;
 
-import engine.Game;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;

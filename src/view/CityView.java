@@ -1,12 +1,9 @@
 package view;
 
-import java.security.PrivilegedAction;
-
 import engine.City;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -22,11 +19,11 @@ public class CityView extends SceneSuper {
     private HBox economicalBuildingsLayout;
     private VBox centerPart;
     private HBox armiesLayout;
-    private String cityName;
+    private ImageView cityHall;
+    private City city;
 
-    public CityView(String cityName) {
+    public CityView( City city) {
         super();
-        this.cityName = cityName;
         Region r = new Region();
         HBox.setHgrow(r, Priority.ALWAYS);
         worldMap = new Button("World Map");
@@ -40,7 +37,13 @@ public class CityView extends SceneSuper {
         economicalBuildingsLayout.setSpacing(20);
         centerPart = new VBox();
         centerPart.setSpacing(20);
-        centerPart.getChildren().addAll(economicalBuildingsLayout,new Label ("CityHall"));
+        switch (city.getName()){
+            case "Rome" : cityHall = new ImageView(images.romeCityHallImage);break;
+            case "Sparta" : cityHall = new ImageView(images.spartaCityHallImage);break;
+            case "Cairo" : cityHall = new ImageView(images.cairoCityHallImage);break;
+        }
+        centerPart.setAlignment(Pos.CENTER);
+        centerPart.getChildren().addAll(economicalBuildingsLayout,cityHall);
         armiesLayout = new HBox();
         armiesLayout.setSpacing(20);
         mainLayout.setRight(miltaryBuildingsLayout);
@@ -50,14 +53,16 @@ public class CityView extends SceneSuper {
         
     }
 
+    public City getCity() {
+        return city;
+    }
+
     public Button getWorldMap() {
         return worldMap;
     }
 
-   
-
-    public String getCityName(){
-        return cityName;
+    public ImageView getCityHall (){
+        return cityHall;
     }
 
     public BorderPane getMainLayout() {

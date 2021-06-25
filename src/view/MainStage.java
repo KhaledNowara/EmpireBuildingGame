@@ -1,13 +1,10 @@
 package view;
 
-import java.awt.Toolkit;
-
-import controller.GameController;
+//import controller.GameController;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class MainStage extends Application {
@@ -16,7 +13,7 @@ public class MainStage extends Application {
 
 	private StartScene startScene;
 	private Scene scene ;
-	private GameController gameController ; 
+	//private GameController gameController ; 
 
 	public StartScene getStartScene() {
 		return startScene;
@@ -42,7 +39,7 @@ public class MainStage extends Application {
 		stage.setMaximized(true);
 		stage.show();
 
-		gameController = new GameController(this,stage);
+		//gameController = new GameController(this,stage);
 		//gameController.Sparta = w.getSparta();
 
 
@@ -56,7 +53,7 @@ public class MainStage extends Application {
 
 	public static void main(String[] args){
         launch(args);
-	; 
+	 
 
 	}
 }

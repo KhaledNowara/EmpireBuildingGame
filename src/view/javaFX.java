@@ -5,6 +5,10 @@ import javafx.application.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.*;
+import units.Archer;
+import units.Cavalry;
+import units.Infantry;
+import units.Unit;
 import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -24,11 +28,12 @@ public class javaFX extends Application {
         awlany.setSpacing(50);
         awlany.setAlignment(Pos.CENTER);
         Label label1 = new Label("Name:");
-        String [] a = {"wala wa7ed", "wala meya","wla alf we toltomya"};
-        ComboBox batee5 = new ComboBox<String>();
-        for(String batoot: a){
-            batee5.getItems().add(batoot);
-        }
+        Unit [] a = {new Archer(0, 0, 0, 0, 0), new Cavalry(0, 0, 0, 0, 0),new Infantry(0,0,0,0,0)};
+        ComboBox<Unit> box = new ComboBox<Unit>();
+       
+						for(Unit u: a){
+							box.getItems().add(u);
+						}
         test.add(label1);
         
         label1.setFont(new Font("Arial", 30));
@@ -49,7 +54,7 @@ public class javaFX extends Application {
         b.setFont(new Font("Arial", 30));
 
         
-        vb.getChildren().addAll(awlany,b,batee5,city);
+        vb.getChildren().addAll(awlany,b,box,city);
         vb.setSpacing(100);
         vb.setAlignment(Pos.CENTER);
         scene1 = new Scene(vb,1920,1080,Color.DARKBLUE);

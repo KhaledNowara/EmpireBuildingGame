@@ -38,7 +38,7 @@ public class Infantry extends Unit{
 
 	@Override
 	public String toString() {
-		return "Infantry" + super.toString();
+		return "Infantry: " + super.toString();
 	}
 	public void attack (Unit target) throws FriendlyFireException{
 		super.attack(target);

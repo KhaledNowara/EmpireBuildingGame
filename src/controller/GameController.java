@@ -3,14 +3,10 @@ package controller;
 
 import java.io.IOException;
 
-import buildings.ArcheryRange;
-import buildings.Barracks;
 import buildings.EconomicBuilding;
-import buildings.Farm;
 import buildings.MilitaryBuilding;
 import engine.City;
 import engine.Game;
-import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -18,11 +14,11 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import units.Army;
 import units.Unit;
+import view.ChooseArmyAttackMenu;
 import view.ChooseArmyScene;
 import view.CityView;
 import view.ControlledCityMenu;
 import view.MainStage;
-import view.MessageBox;
 import view.NonControlledCityMenu;
 import view.SceneSuper;
 import view.StartScene;
@@ -79,9 +75,14 @@ public class GameController {
 			try {
 			game = new Game(startScene.getNameText().getText(),startScene.getCityName());
 			wmScene = new WorldMapScene();
-			wmScene.getRome().setOnMouseClicked(( e -> viewCityListner("Rome")));
-			wmScene.getSparta().setOnMouseClicked((e -> viewCityListner("Sparta")));
-			wmScene.getCairo().setOnMouseClicked((e -> viewCityListner("Cairo")));
+			for(City c: game.getAvailableCities()){
+				if (c.getName().equals("Rome"))
+				wmScene.getRome().setOnMouseClicked(( e -> viewCityListner("Rome",RomeView)));
+				if (c.getName().equals("Sparta"))
+				wmScene.getSparta().setOnMouseClicked((e -> viewCityListner("Sparta",SpartaView)));
+				if (c.getName().equals("Cairo"))
+				wmScene.getCairo().setOnMouseClicked((e -> viewCityListner("Cairo",CairoView)));
+			}
 			updateInfo(wmScene);
 			
 			for (City c : game.getPlayer().getControlledCities()){
@@ -92,10 +93,10 @@ public class GameController {
 					else
 						if(c.getName().equals("Cairo")){
 							CairoView = generateCityView(c);
-							gameStage.changeViews(RomeView.getMainLayout());}
+							gameStage.changeViews(CairoView.getMainLayout());}
 						else{
 							SpartaView = generateCityView(c);
-							gameStage.changeViews(RomeView.getMainLayout());
+							gameStage.changeViews(SpartaView.getMainLayout());
 						}	
 			}
 		}
@@ -111,14 +112,15 @@ public class GameController {
 
 	}
 
-	public void viewCityListner(String c){
+	public void viewCityListner(String c, CityView cityView){
 
 		
 		for(int i=0; i<game.getPlayer().getControlledCities().size();i++){    
         
 			if(c.equals(game.getPlayer().getControlledCities().get(i).getName())){
 	
-				ControlledCityMenu menu = new  ControlledCityMenu(stage, "ahdjfasfdsankdafshaskdfhdas");
+				ControlledCityMenu menu = new  ControlledCityMenu(stage, "ahdjfasfdsankdafshaskdfhdas",cityView);
+				menu.getEnter().setOnAction(e -> enterCityListner(menu));
 				boolean x = true;
 			
 				for(Army a : game.getPlayer().getControlledArmies()){
@@ -127,9 +129,9 @@ public class GameController {
 						HBox b = new HBox();
 						Label l = new Label(a.getName());
 
-						ComboBox box = new ComboBox<String>();
+						ComboBox<Unit> box = new ComboBox<Unit>();
 						for(Unit u: a.getUnits()){
-							box.getItems().add(u.toString());
+							box.getItems().add(u);
 						}
 						b.getChildren().addAll(l,box);
 						menu.getArmiesInfo().getChildren().add(b);
@@ -142,15 +144,20 @@ public class GameController {
 			}
 		}
 		NonControlledCityMenu mmm = new  NonControlledCityMenu(stage, "ahdjfasfdsankdafshaskdfhdas");
-		for(City city : game.getAvailableCities()){
-			if (city.isUnderSiege()){
-				if (city.getTurnsUnderSiege() == 3){
-					mmm.getTurnsUnderSeige().setText("You must attck the city this turn ");
+		mmm.getLaySeige().setOnAction(e -> sendArmyListener(mmm.getStage(), c));
+		for(City city2: game.getAvailableCities()){;
+			if (city2.getName().equals(c)){
+				if (city2.isUnderSiege()){
+					if (city2.getTurnsUnderSiege() == 3){
+						mmm.getTurnsUnderSeige().setText("You must attck the city this turn ");
 
+					}
+					else{
+					mmm.getTurnsUnderSeige().setText("The City has been UnderSiege for " + city2.getTurnsUnderSiege() + " Turns");
+					}
 				}
-				else{
-				mmm.getTurnsUnderSeige().setText("The City has been UnderSiege for " + city.getTurnsUnderSiege() + " Turns");
-				}
+				else mmm.getTurnsUnderSeige().setText("City is not under siege");
+  
 			}
 			
 		}
@@ -160,6 +167,31 @@ public class GameController {
         
 	}
 
+	public void sendArmyListener (Stage s, String cityName){
+		ChooseArmyAttackMenu m = new ChooseArmyAttackMenu(s, cityName);
+		boolean flag = true;
+		for(Army a: game.getPlayer().getControlledArmies()){
+			flag = false;
+			HBox h = new HBox();
+			Button b = new Button (a.getName());
+			m.getArmies().put(b,a);
+			ComboBox<Unit> box = new ComboBox<Unit>();
+			for(Unit u: a.getUnits()){
+				box.getItems().add(u);
+			}
+			h.getChildren().addAll(b,box);
+			m.getElements().getChildren().add(h);
+		}
+		if (flag) m.getElements().getChildren().add(new Label("You have no Attacking armies \nGo to your cities and create armies to attck with"));
+		m.getStage().showAndWait();
+
+	}
+
+	public void enterCityListner(ControlledCityMenu cm){
+		cm.getStage().close();
+		upadateCityView(cm.getCityView(),cm.getCityView().getCity());
+		gameStage.changeViews(cm.getCityView().getMainLayout());
+	}
 
 	public void updateInfo(SceneSuper s) {
         s.getPlayer().setText( game.getPlayer().getName());
@@ -168,7 +200,7 @@ public class GameController {
         s.getFood().setText("Food :  " + (int) game.getPlayer().getFood());
     }
 	public CityView generateCityView(City c ){
-		CityView current = new CityView(c.getName());
+		CityView current = new CityView(c);
 		current.getWorldMap().setOnAction(e -> backToWorldMap());
 		upadateCityView(current, c);
 		gameStage.changeViews(current.getMainLayout());

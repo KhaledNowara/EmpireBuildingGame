@@ -15,10 +15,12 @@ public class ControlledCityMenu extends MessageBox {
     HBox Buttons;
     Button enter;
     Button close;
+    CityView cityView;
    
 
-    public ControlledCityMenu (Stage s,String nm){
+    public ControlledCityMenu (Stage s,String nm, CityView c ){
         super(s);
+        cityView = c;
         mainLayout = new BorderPane();
         name = new Label(nm);
         armiesInfo = new VBox();
@@ -37,6 +39,14 @@ public class ControlledCityMenu extends MessageBox {
         super.getStage().setScene(sm);
         //super.getStage().showAndWait();
     }
+
+
+    public CityView getCityView() {
+        return cityView;
+    }
+
+
+   
 
 
     public BorderPane getMainLayout() {
