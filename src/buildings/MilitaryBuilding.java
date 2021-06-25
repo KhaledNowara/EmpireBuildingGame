@@ -17,7 +17,7 @@ abstract public class MilitaryBuilding extends Building{
 		
 		super(cost,upgradeCost);
 		this.recruitmentCost=recruitmentCost;
-        this.maxRecruit=3;
+        this.maxRecruit = 3;
 
 		
 	}

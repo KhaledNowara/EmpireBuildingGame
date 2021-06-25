@@ -20,6 +20,12 @@ abstract public class Unit {
 		this.currentSoldierCount=maxSoldierCount;
 
 	}
+	@Override
+	public String toString() {
+
+		return "[currentSoldierCount="  + ", level=" + level
+				+ ", maxSoldierCount=" + maxSoldierCount + "]";
+	}
 	public Unit(int level,int maxSoldierCount,double idleUpkeep,double marchingUpkeep,double siegeUpkeep,Army parentArmy) {
 		this.level=level;
 		this.maxSoldierCount=maxSoldierCount;

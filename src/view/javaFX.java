@@ -2,6 +2,7 @@ package view;
 import java.util.ArrayList;
 
 import javafx.application.*;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.*;
 import javafx.scene.*;
@@ -23,9 +24,13 @@ public class javaFX extends Application {
         awlany.setSpacing(50);
         awlany.setAlignment(Pos.CENTER);
         Label label1 = new Label("Name:");
-
-
+        String [] a = {"wala wa7ed", "wala meya","wla alf we toltomya"};
+        ComboBox batee5 = new ComboBox<String>();
+        for(String batoot: a){
+            batee5.getItems().add(batoot);
+        }
         test.add(label1);
+        
         label1.setFont(new Font("Arial", 30));
         TextField textField = new TextField ();
         textField.setPromptText("Enter Player Name");
@@ -44,7 +49,7 @@ public class javaFX extends Application {
         b.setFont(new Font("Arial", 30));
 
         
-        vb.getChildren().addAll(awlany,b,city);
+        vb.getChildren().addAll(awlany,b,batee5,city);
         vb.setSpacing(100);
         vb.setAlignment(Pos.CENTER);
         scene1 = new Scene(vb,1920,1080,Color.DARKBLUE);
@@ -73,19 +78,21 @@ public class javaFX extends Application {
         hb2.getChildren().addAll(cairo,rome,sparta);
         hb2.setSpacing(10);
         hb2.setAlignment(Pos.CENTER);
-   
+       
+        VBox pauseRoot = new VBox(5);
+        pauseRoot.getChildren().add(new Label("Paused"));
+        pauseRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
+        pauseRoot.setAlignment(Pos.CENTER);
+        pauseRoot.setPadding(new Insets(20));
 
         b.setOnAction(e -> {
-            switchViews(scene1, hb2);
-            // test.add(new Label(textField.getText()));
-            // for (Label l : test){
-            //     if (!vb.getChildren().contains(l))
-            //     vb.getChildren().add(l);
-            // }
-            // scene1.setRoot(vb);
-            // //stage.setScene(scene1);
-            // for (Label l : test){
-            //     System.out.println(l.getText());            }
+            Stage popupStage = new Stage(StageStyle.TRANSPARENT);
+            popupStage.initOwner(stage);
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            Scene s = new Scene(pauseRoot, Color.TRANSPARENT);
+            popupStage.setScene(s);
+            popupStage.showAndWait();
+         
         });
         // vb.setId("pane");
         // hb2.setId("pane");

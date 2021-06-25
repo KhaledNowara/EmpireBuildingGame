@@ -9,8 +9,9 @@ public class Army {
 	private String target;
 	private String currentLocation;
 	private  final int maxToHold;
-
-	public Army(String currentLocation) {
+	private String name; 
+	public Army(String currentLocation,String name) {
+		this.name = name;
 		this.currentLocation = currentLocation;
 		this.currentStatus = Status.IDLE;
 		units = new ArrayList<Unit>();
@@ -66,6 +67,14 @@ public class Army {
 		return maxToHold;
 	}
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public void relocateUnit(Unit unit) throws MaxCapacityException{
 		if (units.size()>=maxToHold) throw new MaxCapacityException();
 		units.add(unit);

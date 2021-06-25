@@ -2,26 +2,27 @@ package view;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 public class ChooseArmyScene {
 
-  private Button Cairo;
-  private Button Sparta;
-  private Button Rome;
+  private ImageView Cairo;
+  private ImageView Sparta;
+  private ImageView Rome;
   private HBox mainLayout;
 
 
-  	public Button getCairo() {
+  	public ImageView getCairo() {
 	return Cairo;
 }
 
-public Button getSparta() {
+public ImageView getSparta() {
 	return Sparta;
 }
 
 
-public Button getRome() {
+public ImageView getRome() {
 	return Rome;
 }
 
@@ -34,19 +35,25 @@ public HBox getMainLayOut() {
 
 	public ChooseArmyScene() {
 
-		Cairo = new Button("Cairo");
+		Cairo = new ImageView(images.cairoSelectImage);
 		Cairo.setFocusTraversable(false);
+		Cairo.setOnMousePressed(e -> Cairo.setImage(images.cairoSelectedImage));
+		Cairo.setOnMouseReleased(e -> Cairo.setImage(images.cairoSelectImage));
 
-		Sparta = new Button("Sparta");
+		Sparta = new ImageView(images.spartaSelectImage);
 		Sparta.setFocusTraversable(false);
+		Sparta.setOnMousePressed(e -> Sparta.setImage(images.spartaSelectedImage));
+		Sparta.setOnMouseReleased(e -> Sparta.setImage(images.spartaSelectImage));
 
-		Rome = new Button("Rome");
+		Rome = new ImageView(images.romeSelectImage);
 		Rome.setFocusTraversable(false);
+		Rome.setOnMousePressed(e -> Rome.setImage(images.romeSelectedImage) );
+		Rome.setOnMouseReleased(e -> Rome.setImage(images.romeSelectImage) );
 
 		mainLayout = new HBox();
-		mainLayout.getChildren().addAll(Cairo,Sparta,Rome);
+		mainLayout.getChildren().addAll(Cairo,Rome,Sparta);
 		mainLayout.setAlignment(Pos.CENTER);
-		mainLayout.setSpacing(20);
+		mainLayout.setSpacing(0);
 	}
 
 }

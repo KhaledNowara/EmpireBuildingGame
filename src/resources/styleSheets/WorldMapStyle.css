@@ -1,0 +1,9 @@
+.root
+{
+-fx-background-image: url("/resources/Images/world.png");
+-fx-background-size: 3072px 1728px;
+-fx-font-family: "Ani";
+-fx-font-size: 35pt;
+-fx-font-weight: bold;
+
+}

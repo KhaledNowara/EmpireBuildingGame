@@ -1,0 +1,48 @@
+.text-field {
+    -fx-background-color: rgba(110, 110, 110, 0);
+    -fx-background-insets: 0, 0 0 1 0 ;
+    -fx-background-radius: 0 ;
+    -fx-text-fill: #ece17e;
+    -fx-font-weight:900;
+
+}
+.text-field:focused {
+    -fx-background-color: rgba(110, 110, 110, 0.418);
+    -fx-text-fill: #ece17e;
+    -fx-font-weight:900;
+    /* -fx-background-color: -fx-focus-color, -fx-background ; */
+}
+.root
+{
+  
+    -fx-background-image: url("/resources/Images/cityBackGround.png");
+    -fx-background-size: 3072px 1728px;
+    -fx-background-color: rgb(58, 56, 56);
+    -fx-font-family: "Ani";
+    -fx-font-size: 35pt;
+    -fx-font-weight: bold;
+
+}
+
+.button{
+    -fx-background-color: 
+        linear-gradient(#ffd65b, #e68400),
+        linear-gradient(#ffef84, #f2ba44),
+        linear-gradient(#ffea6a, #efaa22),
+        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),
+        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,2,3,0;
+    -fx-text-fill: #654b00;
+    -fx-font-weight: bold;
+    -fx-font-size: 60px;
+    -fx-padding: 10 20 10 20;
+}  
+ .button:hover,
+ .button:focus {
+    -fx-outline: none;
+    -fx-color: rgb(0, 0, 0);
+    -fx-background-color: #caaa1a;
+    -fx-border-color: #000000;
+  } 
+

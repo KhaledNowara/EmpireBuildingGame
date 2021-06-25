@@ -96,7 +96,7 @@ public class Player {
 	public Player(String name) {
 		this.name = name;
 		this.food = 0;
-		this.treasury = 0;
+		this.treasury = 5000;
 		controlledCities = new ArrayList<City>();
 		controlledArmies = new ArrayList<Army>();
 
@@ -176,10 +176,10 @@ public class Player {
 	}
    
 
-	public void initiateArmy(City city,Unit unit)
+	public void initiateArmy(City city,Unit unit,String name)
 	{
 
-		Army A = new Army(city.getName() + "Attacking Army");
+		Army A = new Army(city.getName(),name);
 		A.getUnits().add(unit);
 		city.getDefendingArmy().getUnits().remove(unit);
         unit.setParentArmy(A);

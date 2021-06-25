@@ -8,14 +8,22 @@
             "type": "java",
             "name": "Launch GameController",
             "request": "launch",
-            "mainClass": "resources.GameController",
+            "mainClass": "controller.GameController",
             "projectName": "Empire building"
         },
         {
             "type": "java",
-            "name": "Launch StaringGame",
+            "name": "Launch MainStage",
             "request": "launch",
-            "mainClass": "view.StaringGame",
+            "mainClass": "view.MainStage",
+            "vmArgs": "--module-path /home/khaled/javafx-sdk-16/lib/ --add-modules javafx.controls,javafx.fxml",
+            "projectName": "Empire building"
+        },
+        {
+            "type": "java",
+            "name": "Launch GameController",
+            "request": "launch",
+            "mainClass": "resources.GameController",
             "vmArgs": "--module-path /home/khaled/javafx-sdk-16/lib/ --add-modules javafx.controls,javafx.fxml",
             "projectName": "Empire building"
         },

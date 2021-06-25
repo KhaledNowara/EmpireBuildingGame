@@ -15,6 +15,10 @@ public class Archer extends Unit{
 	}
 	
 	
+	@Override
+	public String toString() {
+		return ("Archer " + super.toString());
+	}
 	public static  Unit createUnit(int level){
 		try{
 		String[] aV = Game.readFile("archer.csv").get(level);

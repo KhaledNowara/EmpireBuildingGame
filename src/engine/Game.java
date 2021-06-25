@@ -49,7 +49,7 @@ public class Game {
 	  this.player.setGame(this);
 	  availableCities = new ArrayList<City>();
 	  distances = new ArrayList<Distance>();
-	  maxTurnCount = 30;
+	  maxTurnCount = 50;
 	  currentTurnCount=1;
 	  String [] cityName = {"Rome","Sparta","Cairo"};
 	  String [] cityPath = {"rome_army.csv","sparta_army.csv","cairo_army.csv",};
@@ -82,7 +82,7 @@ public class Game {
 
 	public void loadArmy(String cityName,String path) throws IOException{
 		City city = availableCities.get(availableCities.size()-1);
-		city.setDefendingArmy(new Army(cityName));
+		city.setDefendingArmy(new Army(cityName, "Defending Army"));
 		ArrayList <String[]> armyUnits = readFile(path);
 		Army army = city.getDefendingArmy();
 		ArrayList<Unit> units = army.getUnits();

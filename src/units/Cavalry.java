@@ -25,6 +25,11 @@ public class Cavalry extends Unit{
 		}
 		
 	}
+	@Override
+	public String toString() {
+		return "Cavalry " + super.toString();
+	
+	}
 	public static Unit createUnit(int level, Army parentArmy){
 		try{
 		String[] cV = Game.readFile("cavalry.csv").get(level);

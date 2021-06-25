@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 public class StartScene {
 	
 	private Label name;
+	private String cityName;
 	private TextField nameText;
 	private HBox nameComponent;
 	private Button cityButton;
@@ -22,6 +23,12 @@ public class StartScene {
 	}
 	public Label getName() {
 		return name;
+	}
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
 	}
 	public TextField getNameText() {
 		return nameText;
@@ -42,7 +49,9 @@ public class StartScene {
 	public StartScene() {
 		name = new Label("Player Name");
 		nameText = new TextField();
+		nameText.setPromptText("Enter your name");
 		nameText.setFocusTraversable(false);
+		nameText.setId("text-field");
 		nameComponent = new HBox();
 		nameComponent.setAlignment(Pos.CENTER);
 		nameComponent.getChildren().addAll(name,nameText);
@@ -63,6 +72,10 @@ public class StartScene {
 		mainLayout.getChildren().addAll(nameComponent,cityButton,startGame,chosenCity);
 		mainLayout.setAlignment(Pos.CENTER);
 		mainLayout.setSpacing(20);
+		mainLayout.setId("test");
+		//mainLayout.getStylesheets().add("/resources/styleSheets/TextField.css");
+
+		mainLayout.getStylesheets().add("/resources/styleSheets/StartGameStyle.css");
 	
 		
 	}
