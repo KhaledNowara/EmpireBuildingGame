@@ -49,6 +49,7 @@ abstract public class MilitaryBuilding extends Building{
 
 
     public abstract Unit recruit() throws BuildingInCoolDownException, MaxRecruitedException;
+    public abstract Unit recruitForView();
     public void build(Player p,City C ) throws NotEnoughGoldException {
         if (p.getTreasury()< this.getCost())throw new NotEnoughGoldException();
         for(MilitaryBuilding b : C.getMilitaryBuildings()){

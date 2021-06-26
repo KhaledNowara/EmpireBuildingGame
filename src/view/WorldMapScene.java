@@ -7,11 +7,15 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 
 public class WorldMapScene extends SceneSuper {
 	private ImageView Rome; 
-	private Button Sparta ; 
-	private Button Cairo ; 
+	private ImageView Sparta ; 
+	private ImageView Cairo ; 
+	private Button endTurn;
 	private GridPane gridPane ; 
 	private BorderPane  mainLayout;
 
@@ -22,27 +26,21 @@ public class WorldMapScene extends SceneSuper {
 
 	
 
-	public Button getSparta() {
+	public ImageView getSparta() {
 		return Sparta;
 	}
 
 	
 
-	public Button getCairo() {
+	public ImageView getCairo() {
 		return Cairo;
 	}
-
-
-
-
-
-
-
+	public Button getEndTurn(){
+		return endTurn;
+	}
 	public GridPane getGridPane() {
 		return gridPane;
 	}
-
-
 	public BorderPane getMainLayout() {
 		return mainLayout;
 	}
@@ -52,9 +50,12 @@ public class WorldMapScene extends SceneSuper {
 	public WorldMapScene() {
 		super();
        	Rome = new ImageView(images.romeImage);
-	
-		Sparta = new Button ("Sparta");
-		Cairo = new Button ("Cairo");
+		Sparta = new ImageView (images.spartaImage);
+		Cairo = new ImageView (images.cairoImage);
+		endTurn = new Button("End Turn");
+		Region r = new Region();
+        HBox.setHgrow(r, Priority.ALWAYS);
+		super.getInfoPane().getChildren().addAll(endTurn);
 		gridPane = new GridPane();
 		gridPane.setAlignment(Pos.CENTER);
 		gridPane.setVgap(20);

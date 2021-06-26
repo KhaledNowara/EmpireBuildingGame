@@ -33,6 +33,11 @@ public class ArcheryRange extends MilitaryBuilding{
 		return Archer.createUnit(super.getLevel()-1);
 		
 	}
+
+	@Override
+	public Unit recruitForView() {
+		return Archer.createUnit(super.getLevel()-1);
+	}
 	
  
 	

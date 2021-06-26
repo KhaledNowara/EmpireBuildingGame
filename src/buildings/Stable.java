@@ -33,5 +33,10 @@ public class Stable extends MilitaryBuilding {
 	
 }
 
+	@Override
+	public Unit recruitForView() {
+		return Cavalry.createUnit(super.getLevel()-1);
+	}
+
 
 }

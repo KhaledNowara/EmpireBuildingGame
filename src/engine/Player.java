@@ -96,12 +96,17 @@ public class Player {
 	public Player(String name) {
 		this.name = name;
 		this.food = 0;
-		this.treasury = 5000;
+		this.treasury = 95000;
 		controlledCities = new ArrayList<City>();
 		controlledArmies = new ArrayList<Army>();
 
 	}
-
+	public void recruitUnit (MilitaryBuilding b,City c) throws BuildingInCoolDownException,MaxRecruitedException,NotEnoughGoldException{
+		Unit recruit = b.recruit();
+		recruit.setParentArmy(c.getDefendingArmy());
+		c.getDefendingArmy().getUnits().add(recruit);
+		treasury -= b.getRecruitmentCost();
+	}
 	public void recruitUnit(String type ,String cityName) throws BuildingInCoolDownException,MaxRecruitedException,NotEnoughGoldException{
 		City c = null;
 		MilitaryBuilding typeIndicator = null;
@@ -141,14 +146,14 @@ public class Player {
 		
 	}
 
-	public void build (String type , String cityName ) throws NotEnoughGoldException {
+	public Building build (String type , String cityName ) throws NotEnoughGoldException {
 		City c = null;
 		Building b = null;
 		
 		for(City city:controlledCities){
 			if (city.getName().equals(cityName)){
 				c = city;
-				if (!controlledCities.contains(city)) return;
+				if (!controlledCities.contains(city)) return null;
 				break;
 			}
 		}
@@ -161,6 +166,7 @@ public class Player {
 			case "Market": b = new Market();break;
 		}
 		b.build(this, c);
+		return b;
 
 
 
@@ -176,13 +182,14 @@ public class Player {
 	}
    
 
-	public void initiateArmy(City city,Unit unit,String name)
+	public void initiateArmy(City city,ArrayList<Unit> units,String name)
 	{
 
 		Army A = new Army(city.getName(),name);
-		A.getUnits().add(unit);
-		city.getDefendingArmy().getUnits().remove(unit);
-        unit.setParentArmy(A);
+		for (Unit unit: units){
+			A.getUnits().add(unit);
+			city.getDefendingArmy().getUnits().remove(unit);
+        	unit.setParentArmy(A);}
 		this.controlledArmies.add(A);
 
 	}

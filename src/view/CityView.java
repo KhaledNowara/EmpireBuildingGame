@@ -15,6 +15,7 @@ public class CityView extends SceneSuper {
 
     private BorderPane mainLayout;
     private Button worldMap;
+    private Button endTurn;
     private VBox miltaryBuildingsLayout;
     private HBox economicalBuildingsLayout;
     private VBox centerPart;
@@ -24,11 +25,13 @@ public class CityView extends SceneSuper {
 
     public CityView( City city) {
         super();
+        this.city = city;
         Region r = new Region();
         HBox.setHgrow(r, Priority.ALWAYS);
         worldMap = new Button("World Map");
         worldMap.setAlignment(Pos.TOP_LEFT);
-        super.getInfoPane().getChildren().addAll(r,worldMap);
+        endTurn = new Button ("endTurn");
+        super.getInfoPane().getChildren().addAll(r,worldMap,endTurn);
         mainLayout = new BorderPane();
         mainLayout.setTop(super.getInfoPane());
         miltaryBuildingsLayout = new VBox();
@@ -51,6 +54,10 @@ public class CityView extends SceneSuper {
         mainLayout.setBottom(armiesLayout);
         mainLayout.getStylesheets().add("/resources/styleSheets/CityViewStyle.css");
         
+    }
+
+    public Button getEndTurn() {
+        return endTurn;
     }
 
     public City getCity() {

@@ -13,6 +13,15 @@ public class City {
 	private Army defendingArmy;
 	private int turnsUnderSiege;
 	private boolean underSiege;
+	private boolean underThreat;
+
+	public boolean isUnderThreat() {
+		return underThreat;
+	}
+
+	public void setUnderThreat(boolean underThreat) {
+		this.underThreat = underThreat;
+	}
 
 	public String getName() {
 		return name;
@@ -45,6 +54,7 @@ public class City {
 		this.underSiege = underSiege;
 	}
 	public City(String name) {
+		underThreat = false;
 		this.name = name;
 		this.economicalBuildings =new ArrayList<EconomicBuilding>();
 		this.militaryBuildings = new ArrayList<MilitaryBuilding>();

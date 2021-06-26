@@ -15,10 +15,14 @@ public class ChooseArmyAttackMenu extends MessageBox{
     private BorderPane mainLayout;
     private VBox elements;
     private HashMap<Button,Army> Armies;
+    private Label warning;
     private Button close;
 
     public Label getTitle() {
         return Title;
+    }
+    public Label getWarning() {
+        return warning;
     }
     public BorderPane getMainLayout() {
         return mainLayout;
@@ -39,6 +43,7 @@ public class ChooseArmyAttackMenu extends MessageBox{
         Armies = new HashMap<Button,Army>();
         mainLayout = new BorderPane();
         elements = new VBox();
+        warning = new Label("");
         close = new Button("back");
         close.setOnAction(e -> {
             super.getStage().close();

@@ -1,5 +1,6 @@
 package view;
 
+import controller.GameController;
 //import controller.GameController;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -13,7 +14,7 @@ public class MainStage extends Application {
 
 	private StartScene startScene;
 	private Scene scene ;
-	//private GameController gameController ; 
+	private GameController gameController ; 
 
 	public StartScene getStartScene() {
 		return startScene;
@@ -39,7 +40,9 @@ public class MainStage extends Application {
 		stage.setMaximized(true);
 		stage.show();
 
-		//gameController = new GameController(this,stage);
+		gameController = new GameController(this,stage);
+		gameController.shutUpWarning();
+		
 		//gameController.Sparta = w.getSparta();
 
 

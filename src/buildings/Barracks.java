@@ -32,5 +32,10 @@ public class Barracks extends MilitaryBuilding{
 	
 }
 
+	@Override
+	public Unit recruitForView() {
+		return Infantry.createUnit(super.getLevel()-1);
+	}
+
 
 }

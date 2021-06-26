@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import buildings.EconomicBuilding;
 import buildings.MilitaryBuilding;
 import exceptions.FriendlyFireException;
+import exceptions.TargetNotReachedException;
 
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -116,21 +117,22 @@ public class Game {
 
 	}
 
-	public void targetCity(Army army, String targetName){
+	public void targetCity(Army army, City city){
 		if(!army.getCurrentStatus().equals(Status.MARCHING)){
+			city.setUnderThreat(true);
 			int distanceDiff=0;
 			for(int i=0; i<distances.size(); i++){
 				if(
-				(distances.get(i).getFrom().equals(army.getCurrentLocation()) && distances.get(i).getTo().equals(targetName) )|| 
-				(distances.get(i).getTo().equals(army.getCurrentLocation()) && distances.get(i).getFrom().equals(targetName))
+				(distances.get(i).getFrom().equals(army.getCurrentLocation()) && distances.get(i).getTo().equals(city.getName()) )|| 
+				(distances.get(i).getTo().equals(army.getCurrentLocation()) && distances.get(i).getFrom().equals(city.getName()))
 				){
 				distanceDiff = distances.get(i).getDistance();
 				break;
 				}
 			}
 			army.setDistancetoTarget(distanceDiff);
-			army.setTarget(targetName);
-			army.setCurrentLocation(targetName);
+			army.setTarget(city.getName());
+			army.setCurrentLocation(city.getName());
 
 		}
 	}
@@ -176,9 +178,12 @@ public class Game {
 		if (player.getFood() < 0 ){
 			player.setFood(0);
 			for (Army a : player.getControlledArmies() ){
+
+				
 			
 				for(Unit unit: a.getUnits()){
 					unit.setCurrentSoldierCount((int)(unit.getCurrentSoldierCount()*0.9));
+					
 				}
 			}
 		}
