@@ -20,6 +20,7 @@ public class CityHallMenu extends MessageBox{
     private Button close;
     private VBox mainLayout;
     private HBox defendingArmy;
+    //fprivate Label attackingArmies;
     private Label defArmy;
 
     public CityHallMenu (Stage s,int food, int gold, String cityName){
@@ -34,6 +35,7 @@ public class CityHallMenu extends MessageBox{
         header.getChildren().addAll(revenue, this.gold, this.food);
         header.setSpacing(20);
         defArmy = new Label("Our defending army");
+        //ttackingArmies = new Label("Attacking armies located in this city");
         defendingArmy = new HBox();
         defendingArmy.getChildren().add(defArmy);
         build = new Button("Build a new Building");

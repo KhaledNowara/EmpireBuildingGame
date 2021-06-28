@@ -1,7 +1,7 @@
 package view;
 
+
 import controller.GameController;
-//import controller.GameController;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,8 +26,9 @@ public class MainStage extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
+
+		
 		Image logo = new Image("/resources/Images/LOGO.png");
-       // ImageView v = new ImageView(logo);
 		startScene= new StartScene();
 		scene = new Scene(startScene.getMainLayout());
 	
@@ -55,6 +56,7 @@ public class MainStage extends Application {
 	}
 
 	public static void main(String[] args){
+		
         launch(args);
 	 
 

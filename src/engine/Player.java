@@ -96,7 +96,7 @@ public class Player {
 	public Player(String name) {
 		this.name = name;
 		this.food = 0;
-		this.treasury = 95000;
+		this.treasury = 5000;
 		controlledCities = new ArrayList<City>();
 		controlledArmies = new ArrayList<Army>();
 
@@ -182,9 +182,9 @@ public class Player {
 	}
    
 
-	public void initiateArmy(City city,ArrayList<Unit> units,String name)
+	public void initiateArmy(City city,ArrayList<Unit> units,String name) throws MaxLevelException
 	{
-
+		if (units.size()>10) throw new MaxLevelException();
 		Army A = new Army(city.getName(),name);
 		for (Unit unit: units){
 			A.getUnits().add(unit);

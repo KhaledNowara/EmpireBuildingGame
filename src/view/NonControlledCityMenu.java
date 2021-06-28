@@ -13,6 +13,7 @@ public class NonControlledCityMenu extends MessageBox{
         HBox Buttons;
         Button close;
         Button laySeige;
+        Button autoResolve;
         Label turnsUnderSeige;
         Button Attack;
     
@@ -71,6 +72,9 @@ public class NonControlledCityMenu extends MessageBox{
         public void setAttack(Button attack) {
             Attack = attack;
         }
+        public Button getAutoResolve(){
+            return autoResolve;
+        }
 
         public NonControlledCityMenu (Stage s,String nm){
             super(s);
@@ -78,15 +82,16 @@ public class NonControlledCityMenu extends MessageBox{
             name = new Label(nm);
             Buttons = new HBox();
             Attack= new Button("Attack");
+            autoResolve = new Button("Auto Resolve Battle");
             turnsUnderSeige= new Label("Turns Under Seige");
-            laySeige = new Button("Lay Seige");
+            laySeige = new Button("Send Army");
 
             close = new Button("Close");
             close.setOnAction(e -> {
                 super.getParentStage().show();
                 super.getStage().close();
             });
-            Buttons.getChildren().addAll(Attack,laySeige,close) ;
+            Buttons.getChildren().addAll(Attack,autoResolve,laySeige,close) ;
             mainLayout.setTop(name);
             mainLayout.setLeft(turnsUnderSeige);
             mainLayout.setBottom(Buttons);

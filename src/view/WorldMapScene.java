@@ -3,7 +3,6 @@ package view;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -17,6 +16,12 @@ public class WorldMapScene extends SceneSuper {
 	private ImageView Cairo ; 
 	private Button endTurn;
 	private GridPane gridPane ; 
+	public void setGridPane(GridPane gridPane) {
+		this.gridPane = gridPane;
+	}
+
+
+
 	private BorderPane  mainLayout;
 
 	
@@ -55,22 +60,20 @@ public class WorldMapScene extends SceneSuper {
 		endTurn = new Button("End Turn");
 		Region r = new Region();
         HBox.setHgrow(r, Priority.ALWAYS);
-		super.getInfoPane().getChildren().addAll(endTurn);
+		super.getInfoPane().getChildren().addAll(r,endTurn);
 		gridPane = new GridPane();
 		gridPane.setAlignment(Pos.CENTER);
-		gridPane.setVgap(20);
-		gridPane.setHgap(20);
+		gridPane.setVgap(10);
+		gridPane.setHgap(10);
+		gridPane.setMaxSize(3072,1400);
 	
     
 		
 
 		gridPane.add(Rome ,1,1);
-		gridPane.add(new Label(""),2,1);
-		gridPane.add(new Label(""),0,1);
-		gridPane.add(new Label(""),1,0);
-		gridPane.add(new Label(""),2,2);
-		gridPane.add(Sparta,3,1);
-		gridPane.add(Cairo ,2,3);
+		gridPane.add(Sparta,5,1);
+		gridPane.add(Cairo ,3,3);
+		
 		mainLayout = new BorderPane();
 		mainLayout.setCenter(gridPane);
 

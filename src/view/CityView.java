@@ -17,8 +17,9 @@ public class CityView extends SceneSuper {
     private Button worldMap;
     private Button endTurn;
     private VBox miltaryBuildingsLayout;
-    private HBox economicalBuildingsLayout;
+    private VBox economicalBuildingsLayout;
     private VBox centerPart;
+    private HBox buildings;
     private HBox armiesLayout;
     private ImageView cityHall;
     private City city;
@@ -36,8 +37,9 @@ public class CityView extends SceneSuper {
         mainLayout.setTop(super.getInfoPane());
         miltaryBuildingsLayout = new VBox();
         miltaryBuildingsLayout.setSpacing(20);
-        economicalBuildingsLayout = new HBox();
+        economicalBuildingsLayout = new VBox();
         economicalBuildingsLayout.setSpacing(20);
+        buildings = new HBox(economicalBuildingsLayout,miltaryBuildingsLayout);
         centerPart = new VBox();
         centerPart.setSpacing(20);
         switch (city.getName()){
@@ -46,12 +48,15 @@ public class CityView extends SceneSuper {
             case "Cairo" : cityHall = new ImageView(images.cairoCityHallImage);break;
         }
         centerPart.setAlignment(Pos.CENTER);
-        centerPart.getChildren().addAll(economicalBuildingsLayout,cityHall);
         armiesLayout = new HBox();
+        //mageView v =new ImageView(images.tentImage);
+			
+		//armiesLayout.getChildren().add(v);
+        centerPart.getChildren().addAll(cityHall,armiesLayout);
+        centerPart.setMaxSize(2000, 1000);
         armiesLayout.setSpacing(20);
-        mainLayout.setRight(miltaryBuildingsLayout);
+        mainLayout.setRight(buildings);
         mainLayout.setCenter(centerPart);
-        mainLayout.setBottom(armiesLayout);
         mainLayout.getStylesheets().add("/resources/styleSheets/CityViewStyle.css");
         
     }
@@ -84,7 +89,7 @@ public class CityView extends SceneSuper {
 
    
 
-    public HBox getEconomicalBuildingsLayout() {
+    public VBox getEconomicalBuildingsLayout() {
         return economicalBuildingsLayout;
     }
 

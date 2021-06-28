@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import buildings.EconomicBuilding;
 import buildings.MilitaryBuilding;
 import exceptions.FriendlyFireException;
-import exceptions.TargetNotReachedException;
+
 
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -119,6 +119,7 @@ public class Game {
 
 	public void targetCity(Army army, City city){
 		if(!army.getCurrentStatus().equals(Status.MARCHING)){
+			army.setCurrentStatus(Status.MARCHING);
 			city.setUnderThreat(true);
 			int distanceDiff=0;
 			for(int i=0; i<distances.size(); i++){
@@ -132,7 +133,7 @@ public class Game {
 			}
 			army.setDistancetoTarget(distanceDiff);
 			army.setTarget(city.getName());
-			army.setCurrentLocation(city.getName());
+			//army.setCurrentLocation(city.getName());
 
 		}
 	}
@@ -143,7 +144,7 @@ public class Game {
 		if(this.player.getControlledCities().size()>=(availableCities.size()))
 		    b=true;
 
-		if(currentTurnCount > maxTurnCount)
+		if(currentTurnCount >=  maxTurnCount)
 		     b=true;
 		return b;
 	}
@@ -166,13 +167,19 @@ public class Game {
 			player.setFood(player.getFood() - a.foodNeeded());
 			
 			if (a.getCurrentStatus().equals(Status.MARCHING)){
-				a.setDistancetoTarget(a.getDistancetoTarget() - 1);
-				if (a.getDistancetoTarget() == 0){
-					a.setCurrentLocation(a.getTarget());
-					a.setTarget(""); 
-					a.setDistancetoTarget(-1);
-					a.setCurrentStatus(Status.IDLE);
+				for (City c: availableCities){
+					if (c.getName().equals(a.getTarget())){
+						a.setDistancetoTarget(a.getDistancetoTarget() - 1);
+						if (a.getDistancetoTarget() == 0){
+							c.setUnderSiege(true);
+							a.setCurrentLocation(a.getTarget());
+							a.setTarget(""); 
+							a.setDistancetoTarget(-1);
+							a.setCurrentStatus(Status.BESIEGING);
+						}
+					}
 				}
+					
 			}
 		}
 		if (player.getFood() < 0 ){
@@ -183,6 +190,7 @@ public class Game {
 			
 				for(Unit unit: a.getUnits()){
 					unit.setCurrentSoldierCount((int)(unit.getCurrentSoldierCount()*0.9));
+					a.handleAttackedUnit(unit);
 					
 				}
 			}
@@ -229,6 +237,10 @@ public class Game {
 		}
 		
 
+	}
+
+	public boolean playerWon (){
+		return (player.getControlledCities().size()>=(availableCities.size())) ; 
 	}
 
 
