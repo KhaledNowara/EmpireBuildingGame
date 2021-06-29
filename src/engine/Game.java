@@ -141,7 +141,7 @@ public class Game {
     public boolean isGameOver()
 	{
 		boolean b = false;
-		if(this.player.getControlledCities().size()>=(availableCities.size()))
+		if(this.player.getControlledCities().size()==(availableCities.size()))
 		    b=true;
 
 		if(currentTurnCount >=  maxTurnCount)
@@ -209,12 +209,13 @@ public class Game {
 	public void occupy(Army a,String cityName){
 		for(int i=0;i<this.availableCities.size();i++)
 		{   
-			if(availableCities.get(i).getName().equals((cityName)))
+			if(availableCities.get(i).getName().equals((cityName))){
 			player.getControlledCities().add(availableCities.get(i));
 			availableCities.get(i).setDefendingArmy(a);
 		    availableCities.get(i).setUnderSiege(false);
 			availableCities.get(i).setTurnsUnderSiege(-1);
 			player.getControlledArmies().remove(a);
+			}
 		}
 		
 

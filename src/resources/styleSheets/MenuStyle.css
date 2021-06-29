@@ -1,0 +1,74 @@
+.root
+{
+  
+    -fx-background-color: rgba(224, 181, 63, 0.7);
+    -fx-font-family: "Ani";
+    -fx-font-size: 40pt;
+    
+
+}
+.label{
+    /* -fx-background-color:#ffffff; */
+    /* -fx-text-fill: #7c7c7c; */
+    /* -fx-background-color: rgba(110, 110, 110, 0.418); */
+    -fx-text-fill: #61510a;
+    -fx-font-weight:900;
+}
+.button{
+    -fx-background-color: 
+        linear-gradient(#ffd65b, #e68400),
+        linear-gradient(#ffef84, #f2ba44),
+        linear-gradient(#ffea6a, #efaa22),
+        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),
+        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,2,3,0;
+    -fx-text-fill: #654b00;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20 10 20;
+}  
+ .button:hover,
+ .button:focus {
+    -fx-outline: none;
+    -fx-color: rgb(0, 0, 0);
+    -fx-background-color: #caaa1a;
+    -fx-border-color: #000000;
+  }
+
+.combo-box{
+    -fx-border-width:0px;
+    -fx-border-color:#654b00;
+    -fx-border-radius : 50px;
+    -fx-background-radius : 50px;
+    -fx-font-size:30px;
+    -fx-width : 100px;    
+}
+
+.text-field {
+    -fx-background-color: rgba(110, 110, 110, 0);
+    -fx-background-insets: 0, 0 0 1 0 ;
+    -fx-background-radius: 0 ;
+    -fx-text-fill: #000000;
+    -fx-font-weight:900;
+
+}
+.text-field:focused {
+    -fx-background-color: rgba(110, 110, 110, 0.418);
+    -fx-text-fill: #000000;
+    -fx-font-weight:900;
+    /* -fx-background-color: -fx-focus-color, -fx-background ; */
+}
+
+.list-cell{
+    -fx-background-color: #caaa1ab9;
+    -fx-text-fill: #000000;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 20px;
+    -fx-font-weight: Bold;
+
+}
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+    -fx-text-fill: white;
+}
+

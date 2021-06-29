@@ -1,11 +1,14 @@
 package view;
 
 import buildings.MilitaryBuilding;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class MilitaryBuildingInfoMenu extends  MessageBox{
@@ -78,10 +81,16 @@ public class MilitaryBuildingInfoMenu extends  MessageBox{
         });
         footer = new HBox();
         footer.getChildren().addAll(recruit,upgrade,close);
+        footer.setSpacing(30);
         mainLayout = new VBox();
         mainLayout.getChildren().addAll(TypeLevel,unit,warning,footer);
 
+        mainLayout.setSpacing(30);
+        mainLayout.setAlignment(Pos.CENTER);
+        mainLayout.getStylesheets().add("/resources/styleSheets/MenuStyle.css");
+        mainLayout.setPadding(new Insets(10));
         Scene sc = new Scene(mainLayout);
+        sc.setFill(Color.TRANSPARENT);
         super.getStage().setScene(sc);
     }
     

@@ -1,6 +1,7 @@
 package view;
 
 
+import javafx.geometry.Pos;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -25,10 +26,10 @@ public MessageBox (Stage s)
     stage.initOwner(s);
     stage.initModality(Modality.APPLICATION_MODAL);
    // stage.setTitle(title);
-    stage.setMinWidth(1000);
-    stage.setMinHeight(1000);
-    stage.setX(1050);
-    stage.setY(350);
+    //stage.setMinWidth(1000);
+    //stage.setMinHeight(1000);
+    // stage.setX(1050);
+    // stage.setY(350);
 
 
 

@@ -1,5 +1,6 @@
 package view;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -67,8 +68,11 @@ public class createArmyMenu extends MessageBox {
         });
         footer = new HBox();
         footer.getChildren().addAll(createArmy,close);
+        footer.setSpacing(30);
         mainLayout = new VBox();
         mainLayout.getChildren().addAll(title,arn,list,warning,footer);
+        mainLayout.setAlignment(Pos.CENTER);
+        mainLayout.getStylesheets().add("/resources/styleSheets/MenuStyle.css");
         Scene sc = new Scene(mainLayout);
         super.getStage().setScene(sc);
     }

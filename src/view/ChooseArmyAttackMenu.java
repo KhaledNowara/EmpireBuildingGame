@@ -43,6 +43,7 @@ public class ChooseArmyAttackMenu extends MessageBox{
         Armies = new HashMap<Button,Army>();
         mainLayout = new BorderPane();
         elements = new VBox();
+        elements.setSpacing(30);
         warning = new Label("");
         close = new Button("back");
         close.setOnAction(e -> {
@@ -51,6 +52,7 @@ public class ChooseArmyAttackMenu extends MessageBox{
         elements.getChildren().add(Title);
         mainLayout.setBottom(close);
         mainLayout.setCenter(elements);
+        mainLayout.getStylesheets().add("/resources/styleSheets/MenuStyle.css");
         Scene sc = new Scene(mainLayout);
         super.getStage().setScene(sc);
 

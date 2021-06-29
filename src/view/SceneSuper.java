@@ -42,7 +42,7 @@ public class SceneSuper {
         infoPane = new HBox();
         infoPane.setSpacing(100);
         infoPane.getChildren().addAll(player, gold, food, turn);
-        infoPane.setBackground(new Background(new BackgroundFill( Color.rgb(224, 181, 63,0.3),null,null)));
+        infoPane.setBackground(new Background(new BackgroundFill( Color.rgb(224, 181, 63,0.6),null,null)));
     }
 
     

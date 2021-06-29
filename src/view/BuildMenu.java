@@ -1,10 +1,13 @@
 package view;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class BuildMenu extends MessageBox {
@@ -90,8 +93,11 @@ public class BuildMenu extends MessageBox {
             });
         warning = new Label();
         mainLayout = new VBox();
-        mainLayout.getChildren().addAll(title,miltaryBuilingsSection,economicalBuilingsSection,close);
-        
+        mainLayout.getChildren().addAll(title,miltaryBuilingsSection,economicalBuilingsSection,warning,close);
+        mainLayout.setSpacing(50);
+        mainLayout.setAlignment(Pos.CENTER);
+        mainLayout.getStylesheets().add("/resources/styleSheets/MenuStyle.css");
+        mainLayout.setPadding(new Insets(10));
         Scene sc = new Scene(mainLayout);
         super.getStage().setScene(sc);
 

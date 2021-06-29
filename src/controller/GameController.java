@@ -209,12 +209,43 @@ public class GameController {
 	public void attackListener(City c,MessageBox box){
 		
 		if(c.isUnderSiege()){
-			box.getStage().close();
 			Army attack = null;
 			for (Army a: game.getPlayer().getControlledArmies()){
 				if (a.getCurrentStatus() == Status.BESIEGING && a.getCurrentLocation().equals(c.getName()))
 				attack = a;
 			}
+			
+			if (attack == null || attack.getUnits().size() == 0) {
+				System.out.println("sc 1");
+				game.getPlayer().getControlledArmies().remove(attack);
+				upadateCityView(RomeView, RomeView.getCity());
+				upadateCityView(SpartaView, SpartaView.getCity());
+				upadateCityView(CairoView, CairoView.getCity());
+				c.setTurnsUnderSiege(-1);
+				nextTurn = true;
+				c.setUnderSiege(false);
+				c.setUnderThreat(false);
+				reloadMap();
+				new maxSeigeBox(stage,"You lost the battle!");
+				box.getStage().close();		
+				gameStage.changeViews(wmScene.getMainLayout());	
+				return;				
+			}
+			if (c.getDefendingArmy() == null||c.getDefendingArmy().getUnits().size()==0){
+				System.out.println("sc 2");
+				upadateCityView(RomeView, RomeView.getCity());
+				upadateCityView(SpartaView, SpartaView.getCity());
+				upadateCityView(CairoView, CairoView.getCity());
+				reloadMap();
+				new maxSeigeBox(stage, "You won!");
+				game.occupy(attack,c.getName());
+				box.getStage().close();
+				gameStage.changeViews(wmScene.getMainLayout());
+				return;	
+			}
+			System.out.println(attack.getName() + " " + attack.getUnits().size() );
+			System.out.println(c.getDefendingArmy().getName() + " " + c.getDefendingArmy().getUnits().size() );
+			box.getStage().close();
 			BattleView b = new BattleView(attack, c.getDefendingArmy(),"");
 			updateInfo(b);
 			b.getStartRound().setOnAction(e -> endRoundListener(b,c));
@@ -231,20 +262,10 @@ public class GameController {
 				attack = a;
 			}
 			try{
-				game.autoResolve(attack, c.getDefendingArmy());
-				if (c.getDefendingArmy().getUnits().size() == 0){
-
-					new maxSeigeBox(stage,"You won the battle! \n the city is now yours");
-					upadateCityView(RomeView, RomeView.getCity());
-					upadateCityView(SpartaView, SpartaView.getCity());
-					upadateCityView(CairoView, CairoView.getCity());
-					reloadMap();
-					box.getStage().close();
-					gameStage.changeViews(wmScene.getMainLayout());	
-					return;				
-				}
-				else if(attack.getUnits().size() == 0){
-					new maxSeigeBox(stage,"You lost the battle!");
+				
+				if (attack == null || attack.getUnits().size() == 0) {
+					System.out.println("sc 3");
+					game.getPlayer().getControlledArmies().remove(attack);
 					upadateCityView(RomeView, RomeView.getCity());
 					upadateCityView(SpartaView, SpartaView.getCity());
 					upadateCityView(CairoView, CairoView.getCity());
@@ -252,12 +273,55 @@ public class GameController {
 					nextTurn = true;
 					c.setUnderSiege(false);
 					c.setUnderThreat(false);
-					box.getStage().close();
 					reloadMap();
-		
+					new maxSeigeBox(stage,"You lost the battle!");
+					box.getStage().close();		
 					gameStage.changeViews(wmScene.getMainLayout());	
 					return;				
+				}
+				if (c.getDefendingArmy() == null||c.getDefendingArmy().getUnits().size()==0){
+					upadateCityView(RomeView, RomeView.getCity());
+					upadateCityView(SpartaView, SpartaView.getCity());
+					upadateCityView(CairoView, CairoView.getCity());
+					c.setTurnsUnderSiege(-1);
+					reloadMap();
+					new maxSeigeBox(stage, "You won!");
+					System.out.println("sc 4");
+					game.occupy(attack,c.getName());
+					box.getStage().close();
+					gameStage.changeViews(wmScene.getMainLayout());
+					return;	
+				}
+				game.autoResolve(attack, c.getDefendingArmy());
+				if (c.getDefendingArmy().equals(attack)){
 
+					upadateCityView(RomeView, RomeView.getCity());
+					upadateCityView(SpartaView, SpartaView.getCity());
+					upadateCityView(CairoView, CairoView.getCity());
+					nextTurn = true;
+					reloadMap();
+					new maxSeigeBox(stage, "You won!");
+					System.out.println("sc 5");
+					box.getStage().close();
+					gameStage.changeViews(wmScene.getMainLayout());
+					return;					
+				}
+				else if(attack.getUnits().size() == 0){
+					System.out.println("sc 6");
+					game.getPlayer().getControlledArmies().remove(attack);
+					upadateCityView(RomeView, RomeView.getCity());
+					upadateCityView(SpartaView, SpartaView.getCity());
+					upadateCityView(CairoView, CairoView.getCity());
+					c.setTurnsUnderSiege(-1);
+					nextTurn = true;
+					c.setUnderSiege(false);
+					c.setUnderThreat(false);
+					reloadMap();
+					System.out.println("sc 6");
+					new maxSeigeBox(stage,"You lost the battle!");
+					box.getStage().close();		
+					gameStage.changeViews(wmScene.getMainLayout());	
+					return;				
 				}
 
 			}catch(FriendlyFireException e){
@@ -447,12 +511,12 @@ public class GameController {
 		// 	}
 		// }
 		m.getDefendingArmy().getChildren().add(box);
-		m.getBuild().setOnAction(e-> buildListener(c));
+		m.getBuild().setOnAction(e-> buildListener(c,m));
 		m.getCreateArmy().setOnAction(e -> createArmyMenuListener(c));
 		m.getStage().showAndWait();
 	}
 
-	public void buildListener(City c){
+	public void buildListener(City c,CityHallMenu men ){
 		BuildMenu bm= new BuildMenu(stage);
 		boolean mFlag = true;
 		boolean eFlag = true;
@@ -472,10 +536,10 @@ public class GameController {
 			switch (r){
 				
 				case "Farm" : building = new ImageView(images.farmImageS);
-				building.setOnMouseClicked(e -> BuildOption(bm,"Farm",c.getName()));
+				building.setOnMouseClicked(e -> BuildOption(men,bm,"Farm",c.getName()));
 				break;
 				case "Market" : building = new ImageView(images.marketImageS);
-				building.setOnMouseClicked(e -> BuildOption(bm,"Market",c.getName()));
+				building.setOnMouseClicked(e -> BuildOption(men,bm,"Market",c.getName()));
 				break;
 			}
 			bm.getEconomicalBuildings().getChildren().add(building);
@@ -497,13 +561,13 @@ public class GameController {
 			ImageView building = null;
 			switch (r){
 				case "ArcheryRange": building = new ImageView(images.archeryRangeImageS);
-				building.setOnMouseClicked(e -> BuildOption(bm,"ArcheryRange",c.getName()));
+				building.setOnMouseClicked(e -> BuildOption(men,bm,"ArcheryRange",c.getName()));
 				break;
 				case "Barracks": building = new ImageView(images.barracksImageS);
-				building.setOnMouseClicked(e -> BuildOption(bm,"Barracks",c.getName()));
+				building.setOnMouseClicked(e -> BuildOption(men,bm,"Barracks",c.getName()));
 				break;
 				case "Stable" : building = new ImageView(images.stableImageS);
-				building.setOnMouseClicked(e -> BuildOption(bm,"Stable", c.getName()));
+				building.setOnMouseClicked(e -> BuildOption(men,bm,"Stable", c.getName()));
 				break;
 			}
 			bm.getMiltaryBuildings().getChildren().add(building);
@@ -514,7 +578,7 @@ public class GameController {
 
 	}
 
-	public void BuildOption (BuildMenu m,String type,String location){
+	public void BuildOption (CityHallMenu men,BuildMenu m,String type,String location){
 		HBox box = new HBox();
 		Label l = new Label();
 		boolean eco = false;
@@ -542,7 +606,7 @@ public class GameController {
 		Button b = new Button("Build");
 		final boolean ecoCopy = eco;
 		final ImageView bCopy = building;
-		b.setOnAction(e -> build(type,location,m,ecoCopy,bCopy));
+		b.setOnAction(e -> build(type,location,men,m,ecoCopy,bCopy));
 		box.getChildren().addAll(l,b);
 		if(eco) {
 			m.getEconomicalBuy().getChildren().clear();
@@ -555,7 +619,7 @@ public class GameController {
 		}
 	}
 	
-	public void build(String type,String location,BuildMenu b,Boolean eco,ImageView img){
+	public void build(String type,String location,CityHallMenu momo, BuildMenu b,Boolean eco,ImageView img){
 		try{
 			Building building = game.getPlayer().build(type, location);
 			switch(location){
@@ -593,7 +657,7 @@ public class GameController {
 			}
 			b.getStage().close();
 		}catch(NotEnoughGoldException e){
-			b.getWarning().setText("You dont have enough gold");
+			momo.getWarning().setText("You dont have enough gold");
 		}
 
 	}
@@ -670,6 +734,8 @@ public class GameController {
 		m.getStage().close();
 		}catch(MaxLevelException e){
 			m.getWarning().setText("The army cannot exceed 10 units");
+		}catch(IllegalArgumentException e){
+			m.getWarning().setText("The army cannot be empty");
 		}
 
 		
@@ -754,6 +820,10 @@ public class GameController {
     }
 
 	private void endTurn (SceneSuper s){
+		System.out.println("endturn");	
+		for (City c : game.getPlayer().getControlledCities()){
+			System.out.println(c.getName());
+		}	
 		for(City city2: game.getAvailableCities()){
 			if (city2.isUnderSiege()){
 				if (city2.getTurnsUnderSiege() == 3){
@@ -770,6 +840,7 @@ public class GameController {
 		}
 
 		if(game.isGameOver()){
+			System.out.println("this is why  iw on");
 			if(game.playerWon()) new gameOverBox(stage, "You won you are now the khaled gg");
 			else new gameOverBox(stage,"You Lost HAHA ez");
 		}

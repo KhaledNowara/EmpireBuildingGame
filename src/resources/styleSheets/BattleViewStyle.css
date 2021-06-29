@@ -3,7 +3,7 @@
 -fx-background-image: url("/resources/Images/battle.png");
 -fx-background-size: 3072px 1728px;
 -fx-font-family: "Ani";
--fx-font-size: 40pt;
+-fx-font-size: 35pt;
 -fx-font-weight: bold;
 
 }
@@ -30,14 +30,22 @@
     -fx-border-color: #000000;
   } 
   .text-area .content {
-    -fx-background-color: rgba(197, 166, 28, 0.658) ;
+    -fx-background-color: #caaa1ab9 ;
     -fx-text-fill: #000000;
+    -fx-font-family: "Times New Roman";
+   }
+   .text-area{
+    -fx-text-fill: #000000;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 20pt;
+
    }
 
 .list-cell{
+    -fx-background-color: #caaa1ab9;
     -fx-text-fill: #000000;
     -fx-font-family: "Times New Roman";
-    -fx-font-size: 25px;
+    -fx-font-size: 20px;
     -fx-font-weight: Bold;
 
 }

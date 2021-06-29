@@ -102,6 +102,10 @@ public class Player {
 
 	}
 	public void recruitUnit (MilitaryBuilding b,City c) throws BuildingInCoolDownException,MaxRecruitedException,NotEnoughGoldException{
+		if (treasury < b.getRecruitmentCost()){ 
+			throw new NotEnoughGoldException();
+	
+			}
 		Unit recruit = b.recruit();
 		recruit.setParentArmy(c.getDefendingArmy());
 		c.getDefendingArmy().getUnits().add(recruit);
@@ -136,7 +140,13 @@ public class Player {
 			}
 		
 		}
-		if (treasury < Building.getRecruitmentCost()) throw new NotEnoughGoldException();
+		System.out.println(treasury);
+		System.out.println(Building.getRecruitmentCost());
+		if (treasury < Building.getRecruitmentCost()){
+			System.out.println("maho"); 
+			throw new NotEnoughGoldException();
+	
+			}
 
 		recruit = Building.recruit();
 		recruit.setParentArmy(c.getDefendingArmy());
@@ -184,6 +194,7 @@ public class Player {
 
 	public void initiateArmy(City city,ArrayList<Unit> units,String name) throws MaxLevelException
 	{
+		if (units.size() == 0)throw new IllegalArgumentException();
 		if (units.size()>10) throw new MaxLevelException();
 		Army A = new Army(city.getName(),name);
 		for (Unit unit: units){

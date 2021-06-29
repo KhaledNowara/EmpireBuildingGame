@@ -1,5 +1,6 @@
 package view;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,6 +19,8 @@ public class gameOverBox extends MessageBox {
             super.getParentStage().close(); 
         });
         VBox mainLayout = new VBox(message,close);
+        mainLayout.setAlignment(Pos.CENTER);
+        mainLayout.getStylesheets().add("/resources/styleSheets/MenuStyle.css");
         Scene sc = new Scene(mainLayout);
         super.getStage().setScene(sc);
         super.getStage().showAndWait();    }
