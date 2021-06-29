@@ -237,6 +237,7 @@ public class GameController {
 				upadateCityView(SpartaView, SpartaView.getCity());
 				upadateCityView(CairoView, CairoView.getCity());
 				reloadMap();
+				nextTurn = true;
 				new maxSeigeBox(stage, "You won!");
 				game.occupy(attack,c.getName());
 				box.getStage().close();
@@ -283,7 +284,7 @@ public class GameController {
 					upadateCityView(RomeView, RomeView.getCity());
 					upadateCityView(SpartaView, SpartaView.getCity());
 					upadateCityView(CairoView, CairoView.getCity());
-					c.setTurnsUnderSiege(-1);
+					nextTurn = true;
 					reloadMap();
 					new maxSeigeBox(stage, "You won!");
 					System.out.println("sc 4");
