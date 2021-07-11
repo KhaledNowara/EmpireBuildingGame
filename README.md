@@ -6,7 +6,7 @@
  
  This repository was not made public during the making of this project. 
  
- This is an empire building game, implemented using java, and swing library.
+ This is an empire building game, implemented using java, and javafx library.
  
  Authors :
  * Khaled Nowara
